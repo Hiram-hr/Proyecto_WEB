@@ -69,3 +69,8 @@ footer.page-footer {
   width: 100%;
   height: auto;
 }
+
+.custom-list {
+  list-style-type: disc;/* Cambia el tipo de viñeta */
+  color: rgb(61, 72, 233); /* Cambia el color de las viñetas */
+}
