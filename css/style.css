@@ -74,7 +74,21 @@ footer.page-footer {
   list-style-type: disc;/* Cambia el tipo de viñeta */
   color: rgb(61, 72, 233); /* Cambia el color de las viñetas */
 }
-
+/* Color del NAV
 .nav {
   background-color: #b6b7ff;
+}
+*/
+.logoNav{
+  display: inline-block;
+  width: 6em; /*El tamaño que desees*/
+  /*filter: brightness(100); <-- Es porque la imagen no resaltaba sobre fondo negro*/ 
+  margin: -.5em auto; /*<-- Este es para cancelar el espacio entre la barra de navegación y la imagen*/
+  vertical-align: middle;
+}
+
+.logoNav img{
+  display: block;
+  width: 100%;
+  height: auto;
 }
