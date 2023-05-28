@@ -64,12 +64,12 @@ form.addEventListener("submit",e=>{
     let regExNum = /^[0-9]*$/;
     if(!regExNum.test(numero.value) || numero.value.length > 5){
         e.preventDefault();
-        mensaje+='Número de calle inválido<br>';
+        mensaje+='N&uacute;mero de calle inválido<br>';
         hayError = true;
     }
     if(numero.value.length==0){
         e.preventDefault();
-        mensaje+='Número de calle requerido<br>';
+        mensaje+='N&uacute;mero de calle requerido<br>';
         hayError = true;
     }
     if(colonia.value.length > 20){
@@ -85,7 +85,7 @@ form.addEventListener("submit",e=>{
     let regExCp = /^[0-9]{4,7}$/;
     if(!regExCp.test(cp.value)){
         e.preventDefault();
-        mensaje+='Código postal inválido<br>';
+        mensaje+='C&oacute;digo postal inv&aacute;lido<br>';
         hayError = true;
     }
     if(nombre.value.length==0){
@@ -95,7 +95,7 @@ form.addEventListener("submit",e=>{
     }
     if(alcaldias.value.length==0){
         e.preventDefault();
-        mensaje+='Elige la alcaldía a la que perteneces<br>';
+        mensaje+='Elige la alcald&iacute;a a la que perteneces<br>';
         hayError = true;
     }
     if(estados.value.length==0){
@@ -106,7 +106,7 @@ form.addEventListener("submit",e=>{
     let regExMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // [^\s@]+ quiere decir uno o más caracteres que no sean espacios o el símbolo @ (la negación la viene haciendo el ^). \. significa un caracter punto, se pone así porque el punto es un metacaracter para js
     if(!regExMail.test(correo.value)){
         e.preventDefault();
-        mensaje+='Correo inválido<br>';
+        mensaje+='Correo inv&aacute;lido<br>';
         hayError = true;
     }
     let regExTel = /^[0-9]{10}$/;
