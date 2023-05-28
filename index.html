@@ -7,14 +7,18 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-</head>
-<body>
 
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body class="gradiente">
+<header>
   <nav style="margin-bottom: 5px;" class="nav-extended">
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Logo</a>
+    <div class="nav-wrapper"  style="padding: 10px;">
+      <a href="" class="logoNav">
+        <img src="imgs/logoDJmirasahi_v3.png" alt="Logo DJ"/>
+      </a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
 
@@ -25,6 +29,7 @@
       </ul>
     </div>
   </nav>
+</header>
   <ul class="sidenav" id="mobile-demo">
 
     <li><a href="form.html">Contratación</a></li>
@@ -32,41 +37,43 @@
     <li><a href="collapsible.html">Admin</a></li>
   </ul>
 
+  <main>
 
-  <div class="row">
+  <!--SECCION DE GALRÍA DE IMÁGENES-->
+  <section class="row">
 
     <div class="col s12 m7">
 
       <div class="slider">
-        <ul class="slides">
+        <ul class="slides" >
           <li class="imagen-container">
-            <img src="imgs/bautizo.png"  class="responsive-imagen">
+            <img src="imgs/bautizo.png"  class="responsive-imagen" alt="imagen bautizo">
             <div class="caption center-align">
-              <h3>Bautizo</h3>
+              <h3 class="textShadow">Bautizo</h3>
             </div>
           </li>
           <li class="imagen-container">
-            <img src="imgs/primeraComunion.jpg" class="responsive-imagen"> <!-- random image -->
+            <img src="imgs/primeraComunion.jpg" class="responsive-imagen" alt="imagen primera comunion"> <!-- random image -->
             <div class="caption left-align">
-              <h3>Primera Comuni&oacute;n</h3>
+              <h3 class="textShadow">Primera Comuni&oacute;n</h3>
             </div>
           </li>
           <li class="imagen-container" >
-            <img src="imgs/xvAnios.jpg" class="responsive-imagen">
+            <img src="imgs/xvAnios.jpg" class="responsive-imagen" alt="xv anios">
             <div class="caption center-align">
-              <h3>XV a&ntilde;os</h3>
+              <h3 class="textShadow">XV a&ntilde;os</h3>
             </div>
           </li>
           <li class="imagen-container">
-            <img src="imgs/boda.jpg" class="responsive-imagen"> <!-- random image -->
+            <img src="imgs/boda.jpg" class="responsive-imagen" alt="imagen boda"> <!-- random image -->
             <div class="caption left-align">
-              <h3>Boda</h3>
+              <h3 class="textShadow">Boda</h3>
             </div>
           </li>
           <li class="imagen-container">
-            <img src="imgs/cumpleanios.jpg" class="responsive-imagen"> <!-- random image -->
+            <img src="imgs/cumpleanios.jpg" class="responsive-imagen" alt="imagen cumpleanios"> <!-- random image -->
             <div class="caption left-align">
-              <h3>Cumplea&ntilde;os</h3>
+              <h3 class="textShadow">Cumplea&ntilde;os</h3>
             </div>
           </li>
 
@@ -93,18 +100,18 @@
   
       </div>
     </div>
-  </div>
+  </section>
   
-
-  <div class="container">
+  <!--SECCION DE SALONES DJ-->
+  <section class="container">
     <div class="section">
-      <h3 class="header center teal-text text-lighten-3">Salones</h3>
+      <h3 class="header center teal-text text-lighten-1">Salones</h3>
 
       <!--   Icon Section   -->
       <div class="row">
         <div class="col s12 m4">
           <div class="icon-block">
-            <img src="imgs/salon_CDMX.jpg" alt="Imagen 1" width="100%">
+            <img src="imgs/salon_CDMX.jpg" alt="Imagen salon CDMX" width="100%">
             <h5 class="center">BlackDjs</h5>
 
             <p class="center light">CDMX | Gustavo A. Madero</p>
@@ -113,7 +120,7 @@
 
         <div class="col s12 m4">
           <div class="icon-block">
-            <img src="imgs/salon_morelos.jpg" alt="Imagen 1" width="100%">
+            <img src="imgs/salon_morelos.jpg" alt="Imagen salon Morelos" width="100%">
             <h5 class="center">Shadys DJ</h5>
 
             <p class="center light">Morelos | Cuernavaca</p>
@@ -122,7 +129,7 @@
 
         <div class="col s12 m4">
           <div class="icon-block">
-            <img src="imgs/salon_edomex.jpg" alt="Imagen 1" width="100%">
+            <img src="imgs/salon_edomex.jpg" alt="Imagen salon EdoMex" width="100%">
             <h5 class="center">Rank Audio DJs</h5>
 
             <p class="center light">Edo. Mex. | Iztapaluca</p>
@@ -131,7 +138,7 @@
       </div>
 
     </div>
-  </div>
+  </section>
 
 
   <div class="parallax-container valign-wrapper">
@@ -144,15 +151,17 @@
     </div>
     <div class="parallax"><img src="imgs/fondoDJ_1.jpg" alt="Unsplashed background img 2"></div>
   </div>
-
-  <div class="container">
+  <!--SECCION DE MENUS O PAQUETES-->
+  <section class="container">
     <div class="section">
 
       <div class="row">
         <div class="col s12 m6 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Paquete económico</h4>
-          <p class="left-align light">
+          <div style="background-color: #e4a261">
+            <h3><i class="mdi-content-send brown-text"></i></h3>
+            <h4>Paquete económico</h4>
+          </div>
+          <div class="center-align light contenidoMenu">
             <h5>$5500 por 5 horas</h5>
             <h5>Servicio de DJ:</h5>
             <ul class="custom-list">
@@ -171,12 +180,14 @@
             </ul>
             <h5>Incluye montaje y operación. </h5>
             Precios válidos en la República Mexicana.
-            </p>
+          </div>
         </div>
         <div class="col s12 m6 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Paquete ejecutivo</h4>
-          <p class="left-align light">
+          <div style="background-color: #f5c63b;">
+            <h3><i class="mdi-content-send brown-text"></i></h3>
+            <h4>Paquete ejecutivo</h4>
+          </div>
+          <div class="center-align light contenidoMenu">
             <h5>$5500 por 5 horas</h5>
             <h5>Servicio de DJ:</h5>
             <ul class="custom-list">
@@ -202,12 +213,14 @@
             </ul>
             <h5>Incluye montaje y operación. </h5>
             Precios válidos en la República Mexicana.
-            </p>
+          </div>
         </div>
       </div>
 
     </div>
-  </div>
+  </section>
+
+  </main>
 
   <footer class="page-footer teal">
     <div class="container">
@@ -215,8 +228,6 @@
         <div class="col l6 s12">
           <h5 class="white-text">¿Qui&eacute;nes somos?</h5>
           <p class="grey-text text-lighten-4">Somos desarrolladores Web que apoyan el crecimiento de tu negocio o servicio a trav&eacute;s de plataformas en l&iacute;nea.</p>
-
-
         </div>
         <div class="col l3 s12">
           <h5 class="white-text">Redes Sociales:</h5>
@@ -246,4 +257,5 @@
   <script src="js/init.js"></script>
 
   </body>
+
 </html>
