@@ -84,6 +84,7 @@ footer.page-footer {
 .salon {
   background-color: var(--primarioOscuro);
   padding: 1rem;
+  width: 200px;
 }
 
 .salon__nombre {
