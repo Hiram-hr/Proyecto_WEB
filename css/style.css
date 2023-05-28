@@ -74,3 +74,7 @@ footer.page-footer {
   list-style-type: disc;/* Cambia el tipo de viñeta */
   color: rgb(61, 72, 233); /* Cambia el color de las viñetas */
 }
+
+.nav {
+  background-color: #b6b7ff !important;
+}
