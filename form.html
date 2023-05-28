@@ -208,17 +208,19 @@
 
                     <div class="row">
                         <div class="input-field col s4">
-                            <select name="TipoEvento" id="TipoEvento">
+                            <label for="evento">Tipo de Evento:</label>
+                            <select name="evento" id="evento" onchange="ocultarEvento()" required>
                                 <option value="" selected>Elija un tipo de evento</option>
-                                <option value="Bautizo">Bautizo</option>
-                                <option value="PrimeraComunion">Primera Comuni&oacute;n</option>
-                                <option value="XVaños">XV Años</option>
-                                <option value="Boda">Boda</option>
-                                <option value="Cumpleaños">Cumpleaños</option>
-                                <option value="Otro">Otro</option>
+                                <option value="bautizo">Bautizo</option>
+                                <option value="comunion">Primera Comuni&oacute;n</option>
+                                <option value="xv">XV Años</option>
+                                <option value="boda">Boda</option>
+                                <option value="cumpleaños">Cumpleaños</option>
+                                <option value="otro">Otro</option>
                                 <!--input id="OpcOtro" type="text" name="OpcOtro" class="validate"-->
                             </select>
-                            <label for="TipoEvento">Tipo de Evento</label>
+                            <input type="text" id="otroEvento" name="otroEvento" style="display: none;">
+                            
                         </div>
 
                         <div class="input-field col s4">
