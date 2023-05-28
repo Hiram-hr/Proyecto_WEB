@@ -7,6 +7,8 @@ const colonia = document.getElementById("colonia");
 const cp = document.getElementById("cp");
 const alcaldias =  document.getElementById("alcaldias");
 const estados =  document.getElementById("estados");
+const evento =  document.getElementById("TipoEvento");
+const tipoMenu =  document.getElementById("menu");
 
 
 const form = document.getElementById("form");
@@ -19,7 +21,7 @@ form.addEventListener("submit",e=>{
 
     if(nombre.value.length > 10){
         e.preventDefault();
-        mensaje+='Nombre demaciado largo<br>';
+        mensaje+='Nombre demasiado largo<br>';
         hayError = true;
     }
     if(nombre.value.length==0){
@@ -29,7 +31,7 @@ form.addEventListener("submit",e=>{
     }
     if(apPat.value.length > 10){
         e.preventDefault();
-        mensaje+='Apellido Paterno demaciado largo<br>';
+        mensaje+='Apellido Paterno demasiado largo<br>';
         hayError = true;
     }
     if(apPat.value.length==0){
@@ -39,7 +41,7 @@ form.addEventListener("submit",e=>{
     }
     if(apMat.value.length > 10){
         e.preventDefault();
-        mensaje+='Apellido Materno demaciado largo<br>';
+        mensaje+='Apellido Materno demasiado largo<br>';
         hayError = true;
     }
     if(apMat.value.length==0){
@@ -49,7 +51,7 @@ form.addEventListener("submit",e=>{
     }
     if(calle.value.length > 12){
         e.preventDefault();
-        mensaje+='Nombre de la calle demaciado largo<br>';
+        mensaje+='Nombre de la calle demasiado largo<br>';
         hayError = true;
     }
     if(calle.value.length==0){
@@ -100,9 +102,20 @@ form.addEventListener("submit",e=>{
         hayError = true;
     }
 
+    //Parte Raul
 
+    if(evento.value.length==0){
+        e.preventDefault();
+        mensaje+='Elige el tipo de evento<br>';
+        hayError = true;
+    }
+    
+    if(tipoMenu.value.length==0){
+        e.preventDefault();
+        mensaje+='Elige el tipo de menú<br>';
+        hayError = true;
+    }
     if(hayError){//si continuar es false porque algo estuvo mal
         parrafoErr.innerHTML=mensaje;
     } 
-    
 });
