@@ -128,3 +128,28 @@ form.addEventListener("submit",e=>{
     } 
     
 });
+
+document.getElementById("evento").addEventListener("change", mostrarOtro);
+
+function mostrarOtro() {
+   var otroSelect = document.getElementById("evento");
+   var eventoInput = document.getElementById("otroEvento");
+
+   if (otroSelect.value === "otro") {
+     eventoInput.style.display = "block";
+     eventoInput.required = false; // Desactivar la validación del campo "Evento" cuando se selecciona "Otro"
+   } else {
+     eventoInput.style.display = "none";
+     eventoInput.required = true; // Activar la validación del campo "Evento" cuando se deselecciona "Otro"
+   }
+ }
+
+ function ocultarEvento() {
+   var otroSelect = document.getElementById("evento");
+   var eventoInput = document.getElementById("otroEvento");
+
+   if (otroSelect.value !== "otro") {
+     eventoInput.style.display = "none";
+     eventoInput.required = false; // Desactivar la validación del campo "Evento" cuando se selecciona una opción diferente a "Otro"
+   }
+ }
