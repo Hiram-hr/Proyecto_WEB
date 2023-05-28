@@ -70,7 +70,7 @@ form.addEventListener("submit",e=>{
     }
     if(colonia.value.length > 20){
         e.preventDefault();
-        mensaje+='Nombre de la colonia demaciado largo<br>';
+        mensaje+='Nombre de la colonia demasiado largo<br>';
         hayError = true;
     }
     if(colonia.value.length==0){

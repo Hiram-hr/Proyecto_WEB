@@ -10,7 +10,6 @@
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
-
     <body class="gradiente">
         <div class="row container">
             <h2 class="center">Contratación</h2>
@@ -21,47 +20,59 @@
                     <legend>Contacto</legend>
                     <!--<div class="row">-->
                         <div class="input-field col">
+
                             <i class="material-icons prefix">account_circle</i>
                             <input id="nombre" type="text" name="nombre" class="validate">
                             <label for="nombre">Nombre</label>
                         </div>
 
+
                         <div class="input-field col">
+
                             <i class="material-icons prefix">account_circle</i>
                             <input id="apPat" type="text" name="apPat" class="validate">
                             <label for="apPat">Apellido Paterno</label>
                         </div>
 
                         <div class="input-field col">
+
                             <i class="material-icons prefix">account_circle</i>
                             <input id="apMat" type="text" name="apMat" class="validate">
                             <label for="apMat">Apellido Materno</label>
                         </div>
+
                     <!--</div>-->
 
                     <!--<div class="row">-->
                         <div class="input-field col">
+
                             <i class="material-icons prefix">place</i>
                             <input id="calle" type="text" name="calle" class="validate">
                             <label for="calle">Calle</label>
                         </div>
 
+
                         <div class="input-field col">
+
                             <i class="material-icons prefix">edit_location</i>
                             <input id="numero" type="text" name="numero" class="validate">
                             <label for="numero">Número</label>
                         </div>
 
+
                         <div class="input-field col">
+
                             <i class="material-icons prefix">explore</i>
                             <input id="colonia" type="text" name="colonia" class="validate">
                             <label for="colonia">Colonia</label>
                         </div>
+
                     <!--</div>-->
 
                     <!--<div class="row">-->
                         <div class="input-field col">
                             <i class="material-icons prefix">explore</i>
+
                             <select name="alcaldias" id="alcaldias">
                                 <option value="" selected>Elija una opción</option>
                                 <option value="Azcapotzalco">Azcapotzalco</option>
@@ -84,14 +95,18 @@
                             <label for="municipio">Alcaldía/Municipio</label>
                         </div>
 
+
                         <div class="input-field col">
+
                             <i class="material-icons prefix">map</i>
                             <input id="cp" type="text" name="cp" class="validate">
                             <label for="cp">Código Postal</label>
                         </div>
 
+
                         <div class="input-field col">
                             <i class="material-icons prefix">explore</i>
+
                             <select name="estidados" id="estados">
                                 <option value="" selected>Elija una opción</option>
                                 <option value="1">Aguascalientes</option>
@@ -129,41 +144,107 @@
                             </select>
                             <label for="municipio">Entidad Federativa</label>
                         </div>
+
                     <!--</div>-->
 
                     <!--<div class="row">-->
                         <div class="input-field col s12">
+
                             <i class="material-icons prefix">email</i>
                             <input id="correo" type="text" name="correo" class="validate">
                             <label for="correo">Correo</label>
                         </div>
+
                     <!--</div>-->
 
                     <!--<div class="row">-->
                         <div class="input-field col s12">
+
                             <i class="material-icons prefix">ring_volume</i>
                             <input id="telefono" type="text" name="telefono" class="validate">
                             <label for="telefono">Teléfono</label>
                         </div>
+
                     <!--</div>-->
 
                     <!--<div class="row">-->
                         <div class="input-field col s12">
+
                             <i class="material-icons prefix">person</i>
                             <input id="curp" type="text" name="curp" class="validate">
                             <label for="curp">CURP</label>
-                        </div>
-                    <!--</div>-->
-
+                    </div>
+<!--Parte Raul-->
                 </fieldset>
+                <br>
+                
+                <fieldset>
+                    <legend>Evento</legend>
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <i class="material-icons prefix">event</i>
 
-                    <!--<div class="row">-->
+                            <label for="FechaEvento">FECHA DEL EVENTO</label>
+                            <input type="date" id="FechaEvento" name="FechaEvento"
+                                   value="2023-05-29"
+                                   min="2023-05-29" max="2030-12-31">
+                            
+
+                            
+                        </div>
+                        <div class="input-field col s4">
+                            <i class="material-icons prefix">access_time</i>
+                            <input id="Horario" type="time" name="Horario" class="validate">
+                            <label for="Horario">HORARIO</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <select name="TipoEvento" id="TipoEvento">
+                                <option value="" selected>Elija un tipo de evento</option>
+                                <option value="Bautizo">Bautizo</option>
+                                <option value="PrimeraComunion">Primera Comunión</option>
+                                <option value="XVaños">XV Años</option>
+                                <option value="Boda">Boda</option>
+                                <option value="Cumpleaños">Cumpleaños</option>
+                                <option value="Otro">Otro</option>
+                                <!--input id="OpcOtro" type="text" name="OpcOtro" class="validate"-->
+                            </select>
+                            <label for="TipoEvento">Tipo de Evento</label>
+                        </div>
+
+                        <div class="input-field col s4">
+                            <i class="material-icons prefix">accessibility</i>
+                            <input id="cp" type="number" name="NumPersonas" class="validate"
+                            value=75
+                                   min=75 max=200>
+                            <label for="NumPersonas">Número de personas</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <select name="menu" id="menu">
+                                <option value="" selected>Elija una opción</option>
+                                <option value="MenuEconomico">Menú económico</option>
+                                <option value="MenuEjecutivo">Menú ejecutivo</option>
+                            </select>
+                            <label for="menu">Menú</label>
+                        </div>
+                    </div><br><br>
+                </fieldset>
+                
+                <div class="row">
                     <div class="input-field col s6">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Registrar
+                        <button class="btn waves-effect waves-light" type="submit" name="Registrar">Registrar
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
-                    <!--</div>-->
+                        <div class="input-field col s6">
+                        <button class="btn waves-effect waves-light" type="reset" name="Limpiar">Limpiar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+
             </form>
         </div>
 
@@ -173,4 +254,5 @@
         <script src="js/init.js"></script>
         <script src="js/validaciones.js"></script>
     </body>
+
   </html>
