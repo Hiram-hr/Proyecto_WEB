@@ -70,3 +70,24 @@ footer.page-footer {
   width: 100%;
   height: auto;
 }
+
+/** Salones **/
+.salon {
+  background-color: var(--primarioOscuro);
+  padding: 1rem;
+}
+
+.salon__nombre {
+  font-size: 4rem;
+}
+.salon__lugar {
+  font-size: 2.8rem;
+  color: var(--secundario);
+}
+.salon__nombre,
+.salon__lugar {
+  font-family: var(--fuentePrincipal);
+  margin: 1rem 0;
+  text-align: center;
+  line-height: 1.2;
+}
