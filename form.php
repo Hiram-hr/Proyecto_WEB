@@ -14,7 +14,7 @@
     <body class="asd">
         <div class="row container">
             <h2 class="center">Contratación</h2>
-            <p id="parrafoErr">soy el parrafo de error</p>
+            <p id="parrafoErr" style="color:red;"></p>
             <br><br>
             <form class="col s12" action="index.html" method="post" id="form">
                 <fieldset>
@@ -61,7 +61,8 @@
 
                     <div class="row">
                         <div class="input-field col s4">
-                            <select name="alcaldias">
+                            <select name="alcaldias" id="alcaldias">
+                                <option value="" selected>Elija una opción</option>
                                 <option value="Azcapotzalco">Azcapotzalco</option>
                                 <option value="Coyoacan">Coyoacán</option>
                                 <option value="Cuajimalpa">Cuajimalpa de Morelos</option>
@@ -89,7 +90,8 @@
                         </div>
 
                         <div class="input-field col s4">
-                            <select name="estidadF">
+                            <select name="estidados" id="estados">
+                                <option value="" selected>Elija una opción</option>
                                 <option value="1">Aguascalientes</option>
                                 <option value="2">Baja California</option>
                                 <option value="3">Baja California Sur</option>
