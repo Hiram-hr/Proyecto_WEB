@@ -5,90 +5,100 @@
  *
  * Made By MaterializeCSS.com
  */
-nav ul a,
-nav .brand-logo {
-  color: #444;
-}
-
-p {
-  line-height: 2rem;
-}
-
-.sidenav-trigger {
-  color: #26a69a;
-}
-
-.parallax-container {
-  min-height: 380px;
-  line-height: 0;
-  height: auto;
-  color: rgba(255,255,255,.9);
-}
-  .parallax-container .section {
-    width: 100%;
-  }
-
-@media only screen and (max-width : 992px) {
-  .parallax-container .section {
-    position: absolute;
-    top: 40%;
-  }
-  #index-banner .section {
-    top: 10%;
-  }
-}
-
-@media only screen and (max-width : 600px) {
-  #index-banner .section {
-    top: 0;
-  }
-}
-
-.gradiente{
-    background-image: linear-gradient(135deg,#e0f7fa,#b2ebf2,#80deea,#4dd0e1);
-}
-
-.icon-block {
-  padding: 0 15px;
-}
-.icon-block .material-icons {
-  font-size: inherit;
-}
-
-footer.page-footer {
-  margin: 0;
-}
-
-/*Clases creadas para que la calidad de las imágenes en el slider no se vea afectada */
-
-.imagen-container {
-  width: 200px; /* Ajusta el ancho del contenedor según nuestras necesidades */
-}
-
-.responsive-imagen {
-  width: 100%;
-  height: auto;
-}
-
-.custom-list {
-  list-style-type: disc;/* Cambia el tipo de viñeta */
-  color: rgb(61, 72, 233); /* Cambia el color de las viñetas */
-}
-/* Color del NAV
-.nav {
-  background-color: #b6b7ff;
-}
-*/
-.logoNav{
-  display: inline-block;
-  width: 6em; /*El tamaño que desees*/
-  /*filter: brightness(100); <-- Es porque la imagen no resaltaba sobre fondo negro*/ 
-  margin: -.5em auto; /*<-- Este es para cancelar el espacio entre la barra de navegación y la imagen*/
-  vertical-align: middle;
-}
-
-.logoNav img{
-  display: block;
-  width: 100%;
-  height: auto;
-}
+ nav ul a,
+ nav .brand-logo {
+   color: #444;
+ }
+ 
+ p {
+   line-height: 2rem;
+ }
+ 
+ .sidenav-trigger {
+   color: var(--text-color);
+ }
+ 
+ .parallax-container {
+   min-height: 380px;
+   line-height: 0;
+   height: auto;
+   color: rgba(255,255,255,.9);
+ }
+   .parallax-container .section {
+     width: 100%;
+   }
+ 
+ @media only screen and (max-width : 992px) {
+   .parallax-container .section {
+     position: absolute;
+     top: 40%;
+   }
+   #index-banner .section {
+     top: 10%;
+   }
+ }
+ 
+ @media only screen and (max-width : 600px) {
+   #index-banner .section {
+     top: 0;
+   }
+ }
+ 
+ .gradiente{
+     background-image: linear-gradient(135deg,#e0f7fa,#b2ebf2,#80deea,#4dd0e1);
+ }
+ 
+ .icon-block {
+   padding: 0 15px;
+ }
+ .icon-block .material-icons {
+   font-size: inherit;
+ }
+ 
+ footer.page-footer {
+   margin: 0;
+ }
+ 
+ /*Clases creadas para que la calidad de las imágenes en el slider no se vea afectada */
+ 
+ .imagen-container {
+   width: 200px; /* Ajusta el ancho del contenedor según nuestras necesidades */
+ }
+ 
+ .responsive-imagen {
+   width: 100%;
+   height: auto;
+ }
+ 
+ .custom-list {
+   list-style-type: disc;/* Cambia el tipo de viñeta */
+   color: rgb(61, 72, 233); /* Cambia el color de las viñetas */
+ }
+ /* Color del NAV
+ .nav {
+   background-color: #b6b7ff;
+ }
+ */
+ .logoNav{
+   display: inline-block;
+   width: 6em; /*El tamaño que desees*/
+   /*filter: brightness(100); <-- Es porque la imagen no resaltaba sobre fondo negro*/ 
+   margin: -.5em auto; /*<-- Este es para cancelar el espacio entre la barra de navegación y la imagen*/
+   vertical-align: middle;
+ }
+ 
+ .logoNav img{
+   display: block;
+   width: 100%;
+   height: auto;
+ }
+ 
+ .contenidoMenu{
+   background-color: rgb(224, 224, 224);
+ }
+ 
+ .textShadow{
+   text-shadow: 3px 3px 2px rgb(102, 147, 153);
+   color: #ffffff;
+ }
+ 
