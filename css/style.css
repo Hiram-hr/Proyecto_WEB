@@ -59,3 +59,14 @@ p {
 footer.page-footer {
   margin: 0;
 }
+
+/*Clases creadas para que la calidad de las imágenes en el slider no se vea afectada */
+
+.imagen-container {
+  width: 500px; /* Ajusta el ancho del contenedor según nuestras necesidades */
+}
+
+.responsive-imagen {
+  width: 100%;
+  height: auto;
+}
