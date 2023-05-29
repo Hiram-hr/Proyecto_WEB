@@ -13,6 +13,13 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     </head>
     <body class="gradiente">
+        <header>
+            <div  style="padding: 10px;">
+                 <a href="" class="logoNav">
+                 <img src="imgs/logoDJmirasahi_contratacion.png" alt="Logo DJ"/>
+                 </a>
+            </div>
+         </header>
         <div class="row container">
             <h2 class="center">Contratación</h2>
             <div id='errores' class='row'>
@@ -21,7 +28,7 @@
                 <fieldset>
                     <legend>Contacto</legend>
                     <!--<div class="row">-->
-                        <div class="input-field col">
+                        <div class="input-field col s12 m6">
 
                             <i class="material-icons prefix">account_circle</i>
                             <input id="nombre" type="text" name="nombre" class="validate">
@@ -29,14 +36,14 @@
                         </div>
 
 
-                        <div class="input-field col">
+                        <div class="input-field col s12 m6">
 
                             <i class="material-icons prefix">account_circle</i>
                             <input id="appat" type="text" name="appat" class="validate">
                             <label for="appat">Apellido Paterno</label>
                         </div>
 
-                        <div class="input-field col">
+                        <div class="input-field col s12 m6">
 
                             <i class="material-icons prefix">account_circle</i>
                             <input id="apmat" type="text" name="apmat" class="validate">
@@ -46,7 +53,7 @@
                     <!--</div>-->
 
                     <!--<div class="row">-->
-                        <div class="input-field col">
+                        <div class="input-field col s12 m6">
 
                             <i class="material-icons prefix">place</i>
                             <input id="calle" type="text" name="calle" class="validate">
@@ -54,7 +61,7 @@
                         </div>
 
 
-                        <div class="input-field col">
+                        <div class="input-field col s12 m6">
 
                             <i class="material-icons prefix">edit_location</i>
                             <input id="numero" type="text" name="numero" class="validate">
@@ -62,7 +69,7 @@
                         </div>
 
 
-                        <div class="input-field col">
+                        <div class="input-field col s12 m6">
 
                             <i class="material-icons prefix">explore</i>
                             <input id="colonia" type="text" name="colonia" class="validate">
@@ -72,7 +79,7 @@
                     <!--</div>-->
 
                     <!--<div class="row">-->
-                        <div class="input-field col">
+                        <div class="input-field col s12 m6">
                             <i class="material-icons prefix">explore</i>
 
                             <select name="alcaldia" id="alcaldia">
@@ -98,7 +105,7 @@
                         </div>
 
 
-                        <div class="input-field col">
+                        <div class="input-field col s12 m6">
 
                             <i class="material-icons prefix">map</i>
                             <input id="cp" type="text" name="cp" class="validate">
@@ -106,7 +113,7 @@
                         </div>
 
 
-                        <div class="input-field col">
+                        <div class="input-field col s12 m6">
                             <i class="material-icons prefix">explore</i>
 
                             <select name="estado" id="estado">
@@ -150,7 +157,7 @@
                     <!--</div>-->
 
                     <!--<div class="row">-->
-                        <div class="input-field col s12">
+                        <div class="input-field col s12 m6">
 
                             <i class="material-icons prefix">email</i>
                             <input id="correo" type="text" name="correo" class="validate">
@@ -160,7 +167,7 @@
                     <!--</div>-->
 
                     <!--<div class="row">-->
-                        <div class="input-field col s12">
+                        <div class="input-field col s12 m6">
 
                             <i class="material-icons prefix">ring_volume</i>
                             <input id="telefono" type="text" name="telefono" class="validate">
@@ -170,7 +177,7 @@
                     <!--</div>-->
 
                     <!--<div class="row">-->
-                        <div class="input-field col s12">
+                        <div class="input-field col s12 m6">
 
                             <i class="material-icons prefix">person</i>
                             <input id="curp" type="text" name="curp" class="validate">
@@ -183,12 +190,12 @@
                 <fieldset>
                     <legend>Evento</legend>
                     <div class="row">
-                        <div class="input-field col">
+                        <div class="input-field col s12 m6">
                             <i class="material-icons prefix">event</i>
                             <label class="active" for="fecha">FECHA DEL EVENTO</label>
                             <input type="text" class="datepicker" name="fecha" id="fecha">
                         </div>
-                        <div class="input-field col">
+                        <div class="input-field col s12 m6">
                             <i class="material-icons prefix">access_time</i>
                             <label class="active" for="horario">HORARIO</label>
                             <input id="horario" name="horario" class="timepicker">
@@ -196,7 +203,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="input-field col">
+                        <div class="input-field col s12 m6 l4">
                             <select name="TipoEvento" id="TipoEvento">
                                 <option value="" selected>Elija un tipo de evento</option>
                                 <option value="Bautizo">Bautizo</option>
@@ -207,17 +214,19 @@
                                 <option value="Otro">Otro</option>
                                 <!--input id="OpcOtro" type="text" name="OpcOtro" class="validate"-->
                             </select>
+                            
                             <label for="TipoEvento">Tipo de Evento</label>
+                            <input type="text" id="otroEvento" name="otroEvento" style="display: none;">
                         </div>
 
-                        <div class="input-field col">
+                        <div class="input-field col s12 m6 l4">
                             <i class="material-icons prefix">accessibility</i>
                             <input id="cp" type="number" name="NumPersonas" class="validate"
                             value=75
                                    min=75 max=200>
                             <label for="NumPersonas">Número de personas</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s12 m6 l4">
                             <select name="menu" id="menu">
                                 <option value="" selected>Elija una opción</option>
                                 <option value="MenuEconomico">Menú económico</option>
