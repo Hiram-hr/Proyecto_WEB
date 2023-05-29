@@ -1,3 +1,6 @@
+
+
+
 const nombre = document.getElementById("nombre");
 const appat = document.getElementById("appat");
 const apmat = document.getElementById("apmat");
@@ -124,13 +127,15 @@ form.addEventListener("submit", (e) => {
     
 });
 
-document.getElementById("evento").addEventListener("change", mostrarOtro);
+
+document.getElementById("TipoEvento").addEventListener("change", mostrarOtro);
 
 function mostrarOtro() {
-   var otroSelect = document.getElementById("evento");
+   var otroSelect = document.getElementById("TipoEvento");
    var eventoInput = document.getElementById("otroEvento");
 
-   if (otroSelect.value === "otro") {
+   if (otroSelect.value === "Otro") {
+
      eventoInput.style.display = "block";
      eventoInput.required = false; // Desactivar la validación del campo "Evento" cuando se selecciona "Otro"
    } else {
@@ -140,11 +145,13 @@ function mostrarOtro() {
  }
 
  function ocultarEvento() {
-   var otroSelect = document.getElementById("evento");
+
+   var otroSelect = document.getElementById("TipoEvento");
    var eventoInput = document.getElementById("otroEvento");
 
-   if (otroSelect.value !== "otro") {
+   if (otroSelect.value !== "Otro") {
      eventoInput.style.display = "none";
      eventoInput.required = false; // Desactivar la validación del campo "Evento" cuando se selecciona una opción diferente a "Otro"
    }
  }
+

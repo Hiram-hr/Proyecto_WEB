@@ -92,14 +92,6 @@
    width: 100%;
    height: auto;
  }
-
-.card {
-  margin: .5rem .5rem .5rem .5rem;
-}
-
-fieldset{
-  border: 0;
-}
  
  .contenidoMenu{
    background-color: rgb(224, 224, 224);
@@ -115,5 +107,11 @@ fieldset{
    padding:5px;
    background-color: #3cb7c7;
    font-weight: bold;
-}
  
+.card {
+  margin: .5rem .5rem .5rem .5rem;
+}
+
+fieldset{
+  border: 0;
+}
