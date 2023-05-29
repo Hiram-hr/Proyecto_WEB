@@ -71,9 +71,20 @@ form.addEventListener("submit", (e) => {
     hayError = false;
     mensaje = 'Errores:<br>';
 
+    var regnom = /^[A-Za-záéíóú]+$/;
+
     colocaSiError(errores, nombre, validaLongitud(nombre.value, 2, 15));
+    if(!regnom.test(nombre.value))
+        anadeError(errores, nombre, "El nombre es inválido");
+
     colocaSiError(errores, appat, validaLongitud(appat.value, 2, 15));
+    if(!regnom.test(appat.value))
+        anadeError(errores, appat, "El apellido paterno es inválido");
+
     colocaSiError(errores, apmat, validaLongitud(apmat.value, 2, 15));
+    if(!regnom.test(apmat.value))
+        anadeError(errores, apmat, "El apellido materno es inválido");
+
     colocaSiError(errores, calle, validaLongitud(calle.value, 2, 15));
     colocaSiError(errores, numero, validaLongitud(numero.value, 5, 5));
     if(!/^[0-9]*$/.test(numero.value))
