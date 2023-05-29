@@ -201,17 +201,16 @@
                             <input id="horario" name="horario" class="timepicker">
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="input-field col s12 m6 l4">
                             <select name="TipoEvento" id="TipoEvento">
                                 <option value="" selected>Elija un tipo de evento</option>
-                                <option value="Bautizo">Bautizo</option>
-                                <option value="PrimeraComunion">Primera Comunión</option>
-                                <option value="XVaños">XV Años</option>
-                                <option value="Boda">Boda</option>
-                                <option value="Cumpleaños">Cumpleaños</option>
-                                <option value="Otro">Otro</option>
+                                <option value="bautizo">Bautizo</option>
+                                <option value="comunion">Primera Comuni&oacute;n</option>
+                                <option value="xv">XV Años</option>
+                                <option value="boda">Boda</option>
+                                <option value="cumpleaños">Cumpleaños</option>
+                                <option value="otro">Otro</option>
                                 <!--input id="OpcOtro" type="text" name="OpcOtro" class="validate"-->
                             </select>
                             
@@ -221,22 +220,21 @@
 
                         <div class="input-field col s12 m6 l4">
                             <i class="material-icons prefix">accessibility</i>
-                            <input id="cp" type="number" name="NumPersonas" class="validate"
+                            <input id="NumPersonas" type="number" name="NumPersonas" class="validate"
                             value=75
                                    min=75 max=200>
-                            <label for="NumPersonas">Número de personas</label>
+                            <label for="NumPersonas">N&uacute;mero de personas</label>
                         </div>
                         <div class="input-field col s12 m6 l4">
                             <select name="menu" id="menu">
-                                <option value="" selected>Elija una opción</option>
-                                <option value="MenuEconomico">Menú económico</option>
-                                <option value="MenuEjecutivo">Menú ejecutivo</option>
+                                <option value="" selected>Elija una opci&oacute;n</option>
+                                <option value="MenuEconomico">Men&uacute; econ&oacute;mico</option>
+                                <option value="MenuEjecutivo">Men&uacute; ejecutivo</option>
                             </select>
-                            <label for="menu">Menú</label>
+                            <label for="menu">Men&uacute;</label>
                         </div>
                     </div>
                 </fieldset>
-                
                 <div class="row">
                     <div class="input-field col s6">
                         <button class="btn waves-effect waves-light" type="submit" name="Registrar">Registrar
@@ -245,14 +243,12 @@
                     </div>
                         <div class="input-field col s6">
                         <button class="btn waves-effect waves-light" type="reset" name="Limpiar">Limpiar
-                            <i class="material-icons left">delete</i>
+                            <i class="material-icons right">send</i>
                         </button>
                     </div>
                 </div>
-
             </form>
         </div>
-
         <!--JavaScript at end of body for optimized loading-->
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
