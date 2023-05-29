@@ -8,20 +8,15 @@
       <link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="css/miEstilo.css"  media="screen,projection"/>
       <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <!--UTF-8-->
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     </head>
     <body class="gradiente">
-        <header>
-           <div  style="padding: 10px;">
-                <a href="" class="logoNav">
-                <img src="imgs/logoDJmirasahi_contratacion.png" alt="Logo DJ"/>
-                </a>
-           </div>
-        </header>
         <div class="row container">
-            <h2 class="center">Contrataci&oacute;n</h2>
-            <p id="parrafoErr" style="color:red;"></p>
-
+            <h2 class="center">Contratación</h2>
+            <div id='errores' class='row'>
+            </div>
             <form class="col s10 offset-s1" action="index.html" method="post" id="form">
                 <fieldset>
                     <legend>Contacto</legend>
@@ -37,15 +32,15 @@
                         <div class="input-field col">
 
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="apPat" type="text" name="apPat" class="validate">
-                            <label for="apPat">Apellido Paterno</label>
+                            <input id="appat" type="text" name="appat" class="validate">
+                            <label for="appat">Apellido Paterno</label>
                         </div>
 
                         <div class="input-field col">
 
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="apMat" type="text" name="apMat" class="validate">
-                            <label for="apMat">Apellido Materno</label>
+                            <input id="apmat" type="text" name="apmat" class="validate">
+                            <label for="apmat">Apellido Materno</label>
                         </div>
 
                     <!--</div>-->
@@ -63,7 +58,7 @@
 
                             <i class="material-icons prefix">edit_location</i>
                             <input id="numero" type="text" name="numero" class="validate">
-                            <label for="numero">N&uacute;mero</label>
+                            <label for="numero">Número</label>
                         </div>
 
 
@@ -80,26 +75,26 @@
                         <div class="input-field col">
                             <i class="material-icons prefix">explore</i>
 
-                            <select name="alcaldias" id="alcaldias">
-                                <option value="" selected>Elija una opci&oacute;n</option>
+                            <select name="alcaldia" id="alcaldia">
+                                <option value="" selected>Elija una opción</option>
                                 <option value="Azcapotzalco">Azcapotzalco</option>
-                                <option value="Coyoacan">Coyoac&aacute;n</option>
+                                <option value="Coyoacan">Coyoacán</option>
                                 <option value="Cuajimalpa">Cuajimalpa de Morelos</option>
                                 <option value="GustavoA.Madero">Gustavo A. Madero</option>
                                 <option value="Iztacalco">Iztacalco</option>
                                 <option value="Iztapalapa">Iztapalapa</option>
                                 <option value="LaMagdalenaContreras">La Magdalena Contreras</option>
                                 <option value="MilpaAlta">Milpa Alta</option>
-                                <option value="AlvaroObregon">&Aacute;lvaro Obreg&oacute;n</option>
-                                <option value="Tlahuac">Tl&aacute;huac</option>
+                                <option value="AlvaroObregon">álvaro Obregón</option>
+                                <option value="Tlahuac">Tláhuac</option>
                                 <option value="Tlalpan">Tlalpan</option>
                                 <option value="Xochimilco">Xochimilco</option>
                                 <option value="BenitoJuarez">Benito Juárez</option>
-                                <option value="Cuauhtemoc">Cuauht&eacute;moc</option>
+                                <option value="Cuauhtemoc">Cuauhtémoc</option>
                                 <option value="MiguelHidalgo">Miguel Hidalgo</option>
                                 <option value="VenustianoCarranza">Venustiano Carranza</option>
                             </select>
-                            <label for="municipio">Alcald&iacute;a/Municipio</label>
+                            <label for="alcaldia">Alcaldía/Municipio</label>
                         </div>
 
 
@@ -107,15 +102,15 @@
 
                             <i class="material-icons prefix">map</i>
                             <input id="cp" type="text" name="cp" class="validate">
-                            <label for="cp">C&oacute;digo Postal</label>
+                            <label for="cp">Código Postal</label>
                         </div>
 
 
                         <div class="input-field col">
                             <i class="material-icons prefix">explore</i>
 
-                            <select name="estidados" id="estados">
-                                <option value="" selected>Elija una opci&oacute;n</option>
+                            <select name="estado" id="estado">
+                                <option value="" selected>Elija una opción</option>
                                 <option value="1">Aguascalientes</option>
                                 <option value="2">Baja California</option>
                                 <option value="3">Baja California Sur</option>
@@ -130,23 +125,23 @@
                                 <option value="12">Guerrero</option>
                                 <option value="13">Hidalgo</option>
                                 <option value="14">Jalisco</option>
-                                <option value="15">M&eacute;xico</option>
-                                <option value="16">Michoac&aacute;n</option>
+                                <option value="15">México</option>
+                                <option value="16">Michoacán</option>
                                 <option value="17">Morelos</option>
                                 <option value="18">Nayarit</option>
-                                <option value="19">Nuevo Le&oacute;n</option>
+                                <option value="19">Nuevo León</option>
                                 <option value="20">Oaxaca</option>
                                 <option value="21">Puebla</option>
-                                <option value="22">Quer&eacute;taro</option>
+                                <option value="22">Querétaro</option>
                                 <option value="23">Quintana Roo</option>
-                                <option value="24">San Luis Potos&iacute;</option>
+                                <option value="24">San Luis Potosí</option>
                                 <option value="25">Sinaloa</option>
                                 <option value="26">Sonora</option>
                                 <option value="27">Tabasco</option>
                                 <option value="28">Tamaulipas</option>
                                 <option value="29">Tlaxcala</option>
                                 <option value="30">Veracruz</option>
-                                <option value="31">Yucat&aacute;n</option>
+                                <option value="31">Yucatán</option>
                                 <option value="32">Zacatecas</option>
                             </select>
                             <label for="municipio">Entidad Federativa</label>
@@ -169,9 +164,11 @@
 
                             <i class="material-icons prefix">ring_volume</i>
                             <input id="telefono" type="text" name="telefono" class="validate">
-                            <label for="telefono">Tel&eacute;fono</label>
+                            <label for="telefono">Teléfono</label>
                         </div>
+
                     <!--</div>-->
+
                     <!--<div class="row">-->
                         <div class="input-field col s12">
 
@@ -181,20 +178,20 @@
                     </div>
 <!--Parte Raul-->
                 </fieldset>
-                <br>
+
+                
                 <fieldset>
                     <legend>Evento</legend>
-                    <div class="row">                        
-                        <div class="input-field col s4">
-                            <label for="FechaEvento">Fecha del evento</label>
-                            <input type="date" id="FechaEvento" name="FechaEvento"
-                                   value="2023-05-29"
-                                   min="2023-05-29" max="2030-12-31">                       
+                    <div class="row">
+                        <div class="input-field col">
+                            <i class="material-icons prefix">event</i>
+                            <label class="active" for="fecha">FECHA DEL EVENTO</label>
+                            <input type="text" class="datepicker" name="fecha" id="fecha">
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col">
                             <i class="material-icons prefix">access_time</i>
-                            <input id="Horario" type="time" name="Horario" class="validate">
-                            <label for="Horario">Horario</label>
+                            <label class="active" for="horario">HORARIO</label>
+                            <input id="horario" name="horario" class="timepicker">
                         </div>
                     </div>
                     <div class="row">
@@ -247,7 +244,7 @@
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
         <script src="js/init.js"></script>
-        <script src="js/validaciones.js"></script>
+        <script src="js/form.js"></script>
     </body>
 
   </html>
