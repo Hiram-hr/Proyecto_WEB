@@ -1,144 +1,127 @@
 const nombre = document.getElementById("nombre");
-const apPat = document.getElementById("apPat");
-const apMat = document.getElementById("apMat");
+const appat = document.getElementById("appat");
+const apmat = document.getElementById("apmat");
 const calle = document.getElementById("calle");
 const numero = document.getElementById("numero");
 const colonia = document.getElementById("colonia");
 const cp = document.getElementById("cp");
-const alcaldias =  document.getElementById("alcaldias");
-const estados =  document.getElementById("estados");
-const evento =  document.getElementById("TipoEvento");
-const tipoMenu =  document.getElementById("menu");
-const correo =  document.getElementById("correo");
-const telefono =  document.getElementById("telefono");
-const curp =  document.getElementById("curp");
+const alcaldia =  document.getElementById("alcaldia");
+const estado =  document.getElementById("estado");
+const fecha =  document.getElementById("fecha");
+const horario =  document.getElementById("horario");
 
 
 const form = document.getElementById("form");
-const parrafoErr = document.getElementById("parrafoErr");
-const boton = document.getElementById("btn"); //se ocupa?
+const coleccionErrores = document.getElementById("errores");
+const boton = document.getElementById("btn");
 
-form.addEventListener("submit",e=>{
+document.addEventListener("DOMContentLoaded", function() {
+    //Inicializar elemento de fecha del form
+    const hoy = new Date();
+    const options = {"format":"yyyy-mm-dd",
+                     "minDate": hoy,
+                     "defaultDate": hoy,
+                     "setDefautDate": true
+                     };
+    M.Datepicker.init(fecha, options);
+
+});
+
+function validaLongitud(valida, min, max, vacioPermitido){
+    let mensajes = [];
+    //La longitud es 0 y no se permite dicha longitud, caso especial
+    if(!valida.length && min){
+        mensajes.push('Proporciona este dato');
+        return mensajes;
+    }
+    if(valida.length < min)
+        mensajes.push('Más pequeño de lo permitido');
+    if(valida.length > max)
+        mensajes.push('Más grande de lo permitido');
+
+    return mensajes;
+}
+
+function anadeError(mapa, objeto, error){
+    var existe = mapa.get(objeto);
+    if(typeof existe === 'undefined'){
+        if(error instanceof Array)
+            mapa.set(objeto, error);
+        else
+            mapa.set(objeto, [error]);
+        return;
+    }
+
+    if(error instanceof Array)
+        mapa.set(objeto, existe.concat(error));
+    else
+        existe.push(error);
+}
+
+function colocaSiError(mapaErrores, objeto, errores){
+    if(errores.length)
+        anadeError(mapaErrores, objeto, errores);
+}
+
+form.addEventListener("submit", (e) => {
+    var errores = new Map();
     hayError = false;
     mensaje = 'Errores:<br>';
 
-    if(nombre.value.length > 10){
-        e.preventDefault();
-        mensaje+='Nombre demasiado largo<br>';
-        hayError = true;
-    }
-    if(nombre.value.length==0){
-        e.preventDefault();
-        mensaje+='Nombre requerido<br>';
-        hayError = true;
-    }
-    if(apPat.value.length > 10){
-        e.preventDefault();
-        mensaje+='Apellido Paterno demasiado largo<br>';
-        hayError = true;
-    }
-    if(apPat.value.length==0){
-        e.preventDefault();
-        mensaje+='Apellido Paterno requerido<br>';
-        hayError = true;
-    }
-    if(apMat.value.length > 10){
-        e.preventDefault();
-        mensaje+='Apellido Materno demasiado largo<br>';
-        hayError = true;
-    }
-    if(apMat.value.length==0){
-        e.preventDefault();
-        mensaje+='Apellido Materno requerido<br>';
-        hayError = true;
-    }
-    if(calle.value.length > 12){
-        e.preventDefault();
-        mensaje+='Nombre de la calle demasiado largo<br>';
-        hayError = true;
-    }
-    if(calle.value.length==0){
-        e.preventDefault();
-        mensaje+='Calle requerida<br>';
-        hayError = true;
-    }
-    let regExNum = /^[0-9]*$/;
-    if(!regExNum.test(numero.value) || numero.value.length > 5){
-        e.preventDefault();
-        mensaje+='N&uacute;mero de calle inválido<br>';
-        hayError = true;
-    }
-    if(numero.value.length==0){
-        e.preventDefault();
-        mensaje+='N&uacute;mero de calle requerido<br>';
-        hayError = true;
-    }
-    if(colonia.value.length > 20){
-        e.preventDefault();
-        mensaje+='Nombre de la colonia demasiado largo<br>';
-        hayError = true;
-    }
-    if(colonia.value.length==0){
-        e.preventDefault();
-        mensaje+='Colonia requerida<br>';
-        hayError = true;
-    }
-    let regExCp = /^[0-9]{4,7}$/;
-    if(!regExCp.test(cp.value)){
-        e.preventDefault();
-        mensaje+='C&oacute;digo postal inv&aacute;lido<br>';
-        hayError = true;
-    }
-    if(nombre.value.length==0){
-        e.preventDefault();
-        mensaje+='Nombre requerido<br>';
-        hayError = true;
-    }
-    if(alcaldias.value.length==0){
-        e.preventDefault();
-        mensaje+='Elige la alcald&iacute;a a la que perteneces<br>';
-        hayError = true;
-    }
-    if(estados.value.length==0){
-        e.preventDefault();
-        mensaje+='Elige el estado al que perteneces<br>';
-        hayError = true;
-    }
-    let regExMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // [^\s@]+ quiere decir uno o más caracteres que no sean espacios o el símbolo @ (la negación la viene haciendo el ^). \. significa un caracter punto, se pone así porque el punto es un metacaracter para js
-    if(!regExMail.test(correo.value)){
-        e.preventDefault();
-        mensaje+='Correo inv&aacute;lido<br>';
-        hayError = true;
-    }
-    let regExTel = /^[0-9]{10}$/;
-    if(!regExTel.test(telefono.value)){
-        e.preventDefault();
-        mensaje+='N&uacute;mero inv&aacute;lido<br>';
-        hayError = true;
-    }
-    let regExCURP = /^[A-Z]{4}[0-9]{6}[A-Z]{6}([0-9]{2}|[A-Z][0-9])$/;
-    if(!regExCURP.test(curp.value)){
-        e.preventDefault();
-        mensaje+='CURP inv&aacute;lido<br>';
-        hayError = true;
-    }
+    colocaSiError(errores, nombre, validaLongitud(nombre.value, 2, 15));
+    colocaSiError(errores, appat, validaLongitud(appat.value, 2, 15));
+    colocaSiError(errores, apmat, validaLongitud(apmat.value, 2, 15));
+    colocaSiError(errores, calle, validaLongitud(calle.value, 2, 15));
+    colocaSiError(errores, numero, validaLongitud(numero.value, 5, 5));
+    if(!/^[0-9]*$/.test(numero.value))
+        anadeError(errores, numero, "El dato es inválido");
 
-    //Parte Raul
+    colocaSiError(errores, colonia, validaLongitud(colonia.value, 1, 20));
+    if(!/^[0-9]{4,7}$/.test(cp.value))
+        anadeError(errores, numero, "El dato es inválido");
 
-    if(evento.value.length==0){
+    colocaSiError(errores, alcaldia, validaLongitud(alcaldia.value, 1, Infinity));
+    colocaSiError(errores, estado, validaLongitud(estado.value, 1, Infinity));
+    if(errores.size){
         e.preventDefault();
-        mensaje+='Elige el tipo de evento<br>';
-        hayError = true;
+        coleccionErrores.textContent = '';
+        errores.forEach((eErrores, elemento) => {
+            console.log(elemento);
+            console.log(eErrores);
+            var mensajeError = "";
+            /*let nodElemento = document.createElement("div");
+            nodElemento.classList.add("card","col","red","section");
+
+            let nodTElemento =  document.createElement("h6");*/
+
+            //let nomElem = (typeof elemento.labels !== 'undefined') ? elemento.labels[0] : undefined;
+
+            /*nodTElemento.textContent = (typeof nomElem !== 'undefined') ? nomElem.textContent : elemento.getAttribute('placeholder');
+            nodElemento.appendChild(nodTElemento);
+
+            let nodErrores = document.createElement("ul");
+            nodErrores.classList.add("collection");*/
+            eErrores.forEach((textoError) => {
+                mensajeError += textoError + "; ";
+                /*let nodError = document.createElement("li");
+                nodError.classList.add("collection-item");
+                let nodHError = document.createElement("p");
+                nodHError.textContent = textoError;
+                nodError.appendChild(nodHError);
+                nodErrores.appendChild(nodError);*/
+            });
+            /*nodElemento.appendChild(nodErrores);
+
+            coleccionErrores.appendChild(nodElemento);*/
+            let reganaText = document.createElement("span");
+            reganaText.classList.add("helper-text");
+            reganaText.setAttribute("data-error", mensajeError);
+            elemento.after(reganaText);
+            elemento.classList.add("invalid");
+        });
+        M.updateTextFields();
     }
     
-    if(tipoMenu.value.length==0){
-        e.preventDefault();
-        mensaje+='Elige el tipo de menú<br>';
-        hayError = true;
-    }
-    if(hayError){//si continuar es false porque algo estuvo mal
-        parrafoErr.innerHTML=mensaje;
-    }   
 });
 
 document.getElementById("evento").addEventListener("change", mostrarOtro);
