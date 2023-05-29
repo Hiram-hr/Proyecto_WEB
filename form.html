@@ -8,13 +8,15 @@
       <link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="css/miEstilo.css"  media="screen,projection"/>
       <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <!--UTF-8-->
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     </head>
     <body class="gradiente">
         <div class="row container">
             <h2 class="center">Contratación</h2>
-            <p id="parrafoErr" style="color:red;"></p>
-
+            <div id='errores' class='row'>
+            </div>
             <form class="col s10 offset-s1" action="index.html" method="post" id="form">
                 <fieldset>
                     <legend>Contacto</legend>
@@ -30,15 +32,15 @@
                         <div class="input-field col">
 
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="apPat" type="text" name="apPat" class="validate">
-                            <label for="apPat">Apellido Paterno</label>
+                            <input id="appat" type="text" name="appat" class="validate">
+                            <label for="appat">Apellido Paterno</label>
                         </div>
 
                         <div class="input-field col">
 
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="apMat" type="text" name="apMat" class="validate">
-                            <label for="apMat">Apellido Materno</label>
+                            <input id="apmat" type="text" name="apmat" class="validate">
+                            <label for="apmat">Apellido Materno</label>
                         </div>
 
                     <!--</div>-->
@@ -73,7 +75,7 @@
                         <div class="input-field col">
                             <i class="material-icons prefix">explore</i>
 
-                            <select name="alcaldias" id="alcaldias">
+                            <select name="alcaldia" id="alcaldia">
                                 <option value="" selected>Elija una opción</option>
                                 <option value="Azcapotzalco">Azcapotzalco</option>
                                 <option value="Coyoacan">Coyoacán</option>
@@ -92,7 +94,7 @@
                                 <option value="MiguelHidalgo">Miguel Hidalgo</option>
                                 <option value="VenustianoCarranza">Venustiano Carranza</option>
                             </select>
-                            <label for="municipio">Alcaldía/Municipio</label>
+                            <label for="alcaldia">Alcaldía/Municipio</label>
                         </div>
 
 
@@ -107,7 +109,7 @@
                         <div class="input-field col">
                             <i class="material-icons prefix">explore</i>
 
-                            <select name="estidados" id="estados">
+                            <select name="estado" id="estado">
                                 <option value="" selected>Elija una opción</option>
                                 <option value="1">Aguascalientes</option>
                                 <option value="2">Baja California</option>
@@ -183,20 +185,13 @@
                     <div class="row">
                         <div class="input-field col">
                             <i class="material-icons prefix">event</i>
-
-                            <label for="FechaEvento">FECHA DEL EVENTO</label>
-
-                            <input type="date" id="FechaEvento" name="FechaEvento"
-                                   value='new Date().toJSON().split("T")[0]'
-                                   min='new Date().toJSON().split("T")[0]'>
-                            
-
-                            
+                            <label class="active" for="fecha">FECHA DEL EVENTO</label>
+                            <input type="text" class="datepicker" name="fecha" id="fecha">
                         </div>
                         <div class="input-field col">
                             <i class="material-icons prefix">access_time</i>
-                            <input id="Horario" type="time" name="Horario" class="validate">
-                            <label for="Horario">HORARIO</label>
+                            <label class="active" for="horario">HORARIO</label>
+                            <input id="horario" name="horario" class="timepicker">
                         </div>
                     </div>
 
@@ -253,7 +248,7 @@
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
         <script src="js/init.js"></script>
-        <script src="js/validaciones.js"></script>
+        <script src="js/form.js"></script>
     </body>
 
   </html>
