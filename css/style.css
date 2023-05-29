@@ -98,7 +98,14 @@
  }
  
  .textShadow{
-   text-shadow: 3px 3px 2px rgb(102, 147, 153);
-   color: #ffffff;
- }
+  text-shadow: 3px 3px 2px rgb(102, 147, 153);
+  color: #ffffff;
+}
+
+.mi-legend{
+   border-radius: 5px;
+   padding:5px;
+   background-color: #3cb7c7;
+   font-weight: bold;
+}
  
