@@ -12,6 +12,9 @@ const alcaldia =  document.getElementById("alcaldia");
 const estado =  document.getElementById("estado");
 const fecha =  document.getElementById("fecha");
 const horario =  document.getElementById("horario");
+const correo =  document.getElementById("correo");
+const telefono =  document.getElementById("telefono");
+const curp =  document.getElementById("curp");
 
 
 const form = document.getElementById("form");
@@ -44,6 +47,15 @@ function validaLongitud(valida, min, max, vacioPermitido){
 
     return mensajes;
 }
+/*
+function validaSelect(valida, vacioPermitido){
+    let mensajes = [];
+    //La longitud es 0 y no se permite dicha longitud, caso especial
+    if(valida=="Elija una opción"){
+        mensajes.push('Proporciona este dato');
+        return mensajes;
+    }
+}*/
 
 function anadeError(mapa, objeto, error){
     var existe = mapa.get(objeto);
@@ -68,6 +80,7 @@ function colocaSiError(mapaErrores, objeto, errores){
 
 form.addEventListener("submit", (e) => {
     var errores = new Map();
+     
     hayError = false;
     mensaje = 'Errores:<br>';
 
@@ -91,11 +104,29 @@ form.addEventListener("submit", (e) => {
         anadeError(errores, numero, "El dato es inválido");
 
     colocaSiError(errores, colonia, validaLongitud(colonia.value, 1, 20));
-    if(!/^[0-9]{4,7}$/.test(cp.value))
-        anadeError(errores, numero, "El dato es inválido");
+    if(!/^[0-9]{5}$/.test(cp.value))
+        anadeError(errores, cp, "El dato es inválido");
 
     colocaSiError(errores, alcaldia, validaLongitud(alcaldia.value, 1, Infinity));
+    //colocaSiError(errores, alcaldia, validaSelect(alcaldia.value))
+    if(!/^[0-9]{5}$/.test(cp.value))
+        anadeError(errores, cp, "El código postal es inválido");
     colocaSiError(errores, estado, validaLongitud(estado.value, 1, Infinity));
+    
+    colocaSiError(errores, correo, validaLongitud(correo.value, 10, Infinity));
+    if(!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(correo.value))
+        anadeError(errores, correo, "El correo es inválido");
+
+    colocaSiError(errores, telefono, validaLongitud(telefono.value, 8, 10));
+    if(!/^[0-9]{8,10}$/.test(telefono.value))
+            anadeError(errores, telefono, "El teléfono es inválido");
+
+    //colocaSiError(errores, curp, validaLongitud(curp.value, 8, 10));
+    //curp, LETRA NUMERO O NUMERO NUMERO
+    if(!/^([A-Z]{4}[0-9]{2}(1[0-2]|0[0-9])([0-2][0-9]|3[0-1])[HM][A-Z]{2}[A-Z]{3}[0-9]{2})|([A-Z]{4}[0-9]{2}(1[0-2]|0[0-9])([0-2][0-9]|3[0-1])[HM][A-Z]{2}[A-Z]{4}[0-9]{1})$/.test(curp.value))
+            anadeError(errores, curp, "El curp es inválido");
+    
+
     if(errores.size){
         e.preventDefault();
         coleccionErrores.textContent = '';
@@ -135,9 +166,12 @@ form.addEventListener("submit", (e) => {
         });
         M.updateTextFields();
     }
-    
 });
-
+/*
+form.addEventListener("reset", (e) => {
+    errores.clear();
+});
+*/
 
 document.getElementById("TipoEvento").addEventListener("change", mostrarOtro);
 
