@@ -1,6 +1,3 @@
-
-
-
 const nombre = document.getElementById("nombre");
 const appat = document.getElementById("appat");
 const apmat = document.getElementById("apmat");
@@ -15,6 +12,8 @@ const horario =  document.getElementById("horario");
 const correo =  document.getElementById("correo");
 const telefono =  document.getElementById("telefono");
 const curp =  document.getElementById("curp");
+
+var eliminame = new Array();
 
 
 const form = document.getElementById("form");
@@ -129,7 +128,10 @@ form.addEventListener("submit", (e) => {
 
     if(errores.size){
         e.preventDefault();
-        coleccionErrores.textContent = '';
+        eliminame.forEach((elemdel) => {
+           elemdel.remove();
+        });
+        eliminame = [];
         errores.forEach((eErrores, elemento) => {
             console.log(elemento);
             console.log(eErrores);
@@ -162,6 +164,7 @@ form.addEventListener("submit", (e) => {
             reganaText.classList.add("helper-text");
             reganaText.setAttribute("data-error", mensajeError);
             elemento.after(reganaText);
+            eliminame.push(reganaText);
             elemento.classList.add("invalid");
         });
         M.updateTextFields();
