@@ -92,7 +92,7 @@
                                 <option value="Iztapalapa">Iztapalapa</option>
                                 <option value="LaMagdalenaContreras">La Magdalena Contreras</option>
                                 <option value="MilpaAlta">Milpa Alta</option>
-                                <option value="AlvaroObregon">álvaro Obregón</option>
+                                <option value="AlvaroObregon">Álvaro Obregón</option>
                                 <option value="Tlahuac">Tláhuac</option>
                                 <option value="Tlalpan">Tlalpan</option>
                                 <option value="Xochimilco">Xochimilco</option>
@@ -203,19 +203,22 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s12 m6 l4">
-                            <select name="TipoEvento" id="TipoEvento">
+                            <select name="evento" id="evento">
                                 <option value="" selected>Elija un tipo de evento</option>
                                 <option value="bautizo">Bautizo</option>
                                 <option value="comunion">Primera Comuni&oacute;n</option>
                                 <option value="xv">XV Años</option>
                                 <option value="boda">Boda</option>
-                                <option value="cumpleaños">Cumpleaños</option>
+                                <option value="cumple">Cumpleaños</option>
                                 <option value="otro">Otro</option>
                                 <!--input id="OpcOtro" type="text" name="OpcOtro" class="validate"-->
                             </select>
                             
-                            <label for="TipoEvento">Tipo de Evento</label>
-                            <input type="text" id="otroEvento" name="otroEvento" style="display: none;">
+                            <label for="evento">Tipo de Evento</label>
+                        </div>
+
+                        <div class="input-field col s12 m6 l4">
+                            <input type="text" id="otroev" name="otroev" hidden>
                         </div>
 
                         <div class="input-field col s12 m6 l4">

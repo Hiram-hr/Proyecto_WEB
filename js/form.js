@@ -12,7 +12,8 @@ const horario =  document.getElementById("horario");
 const correo =  document.getElementById("correo");
 const telefono =  document.getElementById("telefono");
 const curp =  document.getElementById("curp");
-
+const tipoevento = document.getElementById("evento");
+var otroevento = document.getElementById("otroev");
 var eliminame = new Array();
 
 
@@ -78,10 +79,8 @@ function colocaSiError(mapaErrores, objeto, errores){
 }
 
 form.addEventListener("submit", (e) => {
+    console.log("Si entro papucho");
     var errores = new Map();
-     
-    hayError = false;
-    mensaje = 'Errores:<br>';
 
     var regnom = /^[A-Za-záéíóú]+$/;
 
@@ -126,8 +125,9 @@ form.addEventListener("submit", (e) => {
             anadeError(errores, curp, "El curp es inválido");
     
 
-    if(errores.size){
+    if(errores.size =! 0){
         e.preventDefault();
+        console.log(errores);
         eliminame.forEach((elemdel) => {
            elemdel.remove();
         });
@@ -136,30 +136,9 @@ form.addEventListener("submit", (e) => {
             console.log(elemento);
             console.log(eErrores);
             var mensajeError = "";
-            /*let nodElemento = document.createElement("div");
-            nodElemento.classList.add("card","col","red","section");
-
-            let nodTElemento =  document.createElement("h6");*/
-
-            //let nomElem = (typeof elemento.labels !== 'undefined') ? elemento.labels[0] : undefined;
-
-            /*nodTElemento.textContent = (typeof nomElem !== 'undefined') ? nomElem.textContent : elemento.getAttribute('placeholder');
-            nodElemento.appendChild(nodTElemento);
-
-            let nodErrores = document.createElement("ul");
-            nodErrores.classList.add("collection");*/
             eErrores.forEach((textoError) => {
                 mensajeError += textoError + "; ";
-                /*let nodError = document.createElement("li");
-                nodError.classList.add("collection-item");
-                let nodHError = document.createElement("p");
-                nodHError.textContent = textoError;
-                nodError.appendChild(nodHError);
-                nodErrores.appendChild(nodError);*/
             });
-            /*nodElemento.appendChild(nodErrores);
-
-            coleccionErrores.appendChild(nodElemento);*/
             let reganaText = document.createElement("span");
             reganaText.classList.add("helper-text");
             reganaText.setAttribute("data-error", mensajeError);
@@ -170,32 +149,27 @@ form.addEventListener("submit", (e) => {
         M.updateTextFields();
     }
 });
-/*
+
 form.addEventListener("reset", (e) => {
+    eliminame.forEach((elemdel) => {
+        elemdel.remove();
+    });
     errores.clear();
 });
-*/
 
-document.getElementById("TipoEvento").addEventListener("change", mostrarOtro);
-
-function mostrarOtro() {
-   var otroSelect = document.getElementById("TipoEvento");
-   var eventoInput = document.getElementById("otroEvento");
-
-   if (otroSelect.value === "Otro") {
-
-     eventoInput.style.display = "block";
-     eventoInput.required = false; // Desactivar la validación del campo "Evento" cuando se selecciona "Otro"
-   } else {
-     eventoInput.style.display = "none";
-     eventoInput.required = true; // Activar la validación del campo "Evento" cuando se deselecciona "Otro"
-   }
- }
+tipoevento.addEventListener("change", (e) => {
+    console.log("eventoso");
+    if(tipoevento.value == 'Otro'){
+        otroevento.removeAttribute("hidden");
+        return;
+    }
+    otroevento.setAttribute("hidden", true);
+});
 
  function ocultarEvento() {
 
-   var otroSelect = document.getElementById("TipoEvento");
-   var eventoInput = document.getElementById("otroEvento");
+   var otroSelect = document.getElementById("evento");
+   var eventoInput = document.getElementById("otroev");
 
    if (otroSelect.value !== "Otro") {
      eventoInput.style.display = "none";
