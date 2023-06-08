@@ -119,13 +119,16 @@ form.addEventListener("submit", (e) => {
     if(!/^[0-9]{8,10}$/.test(telefono.value))
             anadeError(errores, telefono, "El teléfono es inválido");
 
+    if(tipoevento.value === '')
+        anadeError(errores, tipoevento, "Especifique el evento");
+
     //colocaSiError(errores, curp, validaLongitud(curp.value, 8, 10));
     //curp, LETRA NUMERO O NUMERO NUMERO
     if(!/^([A-Z]{4}[0-9]{2}(1[0-2]|0[0-9])([0-2][0-9]|3[0-1])[HM][A-Z]{2}[A-Z]{3}[0-9]{2})|([A-Z]{4}[0-9]{2}(1[0-2]|0[0-9])([0-2][0-9]|3[0-1])[HM][A-Z]{2}[A-Z]{4}[0-9]{1})$/.test(curp.value))
             anadeError(errores, curp, "El curp es inválido");
     
 
-    if(errores.size =! 0){
+    if(errores.size != 0){
         e.preventDefault();
         console.log(errores);
         eliminame.forEach((elemdel) => {
@@ -158,12 +161,14 @@ form.addEventListener("reset", (e) => {
 });
 
 tipoevento.addEventListener("change", (e) => {
-    console.log("eventoso");
-    if(tipoevento.value == 'Otro'){
+    console.log(tipoevento.value);
+    if(tipoevento.value == 'otro'){
         otroevento.removeAttribute("hidden");
+        otroevento.setAttribute("required", true);
         return;
     }
     otroevento.setAttribute("hidden", true);
+    otroevento.removeAttribute("required");
 });
 
  function ocultarEvento() {
