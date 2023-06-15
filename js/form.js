@@ -12,8 +12,9 @@ const horario =  document.getElementById("horario");
 const correo =  document.getElementById("correo");
 const telefono =  document.getElementById("telefono");
 const curp =  document.getElementById("curp");
+const menu = document.getElementById("menu");
 const tipoevento = document.getElementById("evento");
-var otroevento = document.getElementById("otroev");
+const otroevento = document.getElementById("otroev");
 var eliminame = new Array();
 
 
@@ -79,7 +80,6 @@ function colocaSiError(mapaErrores, objeto, errores){
 }
 
 form.addEventListener("submit", (e) => {
-    console.log("Si entro papucho");
     var errores = new Map();
 
     var regnom = /^[A-Za-záéíóú]+$/;
@@ -106,18 +106,19 @@ form.addEventListener("submit", (e) => {
         anadeError(errores, cp, "El dato es inválido");
 
     colocaSiError(errores, alcaldia, validaLongitud(alcaldia.value, 1, Infinity));
-    //colocaSiError(errores, alcaldia, validaSelect(alcaldia.value))
+
     if(!/^[0-9]{5}$/.test(cp.value))
         anadeError(errores, cp, "El código postal es inválido");
+
     colocaSiError(errores, estado, validaLongitud(estado.value, 1, Infinity));
-    
+    colocaSiError(errores, menu, validaLongitud(menu.value, 1, Infinity));
     colocaSiError(errores, correo, validaLongitud(correo.value, 10, Infinity));
     if(!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(correo.value))
         anadeError(errores, correo, "El correo es inválido");
 
     colocaSiError(errores, telefono, validaLongitud(telefono.value, 8, 10));
     if(!/^[0-9]{8,10}$/.test(telefono.value))
-            anadeError(errores, telefono, "El teléfono es inválido");
+        anadeError(errores, telefono, "El teléfono es inválido");
 
     if(tipoevento.value === '')
         anadeError(errores, tipoevento, "Especifique el evento");
@@ -125,13 +126,17 @@ form.addEventListener("submit", (e) => {
     //colocaSiError(errores, curp, validaLongitud(curp.value, 8, 10));
     //curp, LETRA NUMERO O NUMERO NUMERO
     if(!/^([A-Z]{4}[0-9]{2}(1[0-2]|0[0-9])([0-2][0-9]|3[0-1])[HM][A-Z]{2}[A-Z]{3}[0-9]{2})|([A-Z]{4}[0-9]{2}(1[0-2]|0[0-9])([0-2][0-9]|3[0-1])[HM][A-Z]{2}[A-Z]{4}[0-9]{1})$/.test(curp.value))
-            anadeError(errores, curp, "El curp es inválido");
+        anadeError(errores, curp, "El curp es inválido");
     
 
     if(errores.size != 0){
         e.preventDefault();
         console.log(errores);
         eliminame.forEach((elemdel) => {
+            elemdel.parentNode.childNodes.forEach((atribquita) => {
+                if(atribquita.classList != undefined)
+                    atribquita.classList.remove("invalid");
+            });
            elemdel.remove();
         });
         eliminame = [];
@@ -147,7 +152,11 @@ form.addEventListener("submit", (e) => {
             reganaText.setAttribute("data-error", mensajeError);
             elemento.after(reganaText);
             eliminame.push(reganaText);
-            elemento.classList.add("invalid");
+            elemento.parentNode.childNodes.forEach((nodocoloca) => {
+                if(nodocoloca.classList != undefined)
+                    nodocoloca.classList.add("invalid");
+
+            });
         });
         M.updateTextFields();
     }
@@ -157,7 +166,7 @@ form.addEventListener("reset", (e) => {
     eliminame.forEach((elemdel) => {
         elemdel.remove();
     });
-    errores.clear();
+    eliminame = [];
 });
 
 tipoevento.addEventListener("change", (e) => {
@@ -170,15 +179,4 @@ tipoevento.addEventListener("change", (e) => {
     otroevento.setAttribute("hidden", true);
     otroevento.removeAttribute("required");
 });
-
- function ocultarEvento() {
-
-   var otroSelect = document.getElementById("evento");
-   var eventoInput = document.getElementById("otroev");
-
-   if (otroSelect.value !== "Otro") {
-     eventoInput.style.display = "none";
-     eventoInput.required = false; // Desactivar la validación del campo "Evento" cuando se selecciona una opción diferente a "Otro"
-   }
- }
 
