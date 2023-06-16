@@ -171,8 +171,10 @@ form.addEventListener("submit", (e) => {
         M.updateTextFields();
     }
     else{
-        tipoevento.value = otroevento.value;
-        otroevento.setAttribute(disabled, true);
+        if(tipoevento.value == 'otro'){
+            tipoevento.value = otroevento.value;
+            otroevento.setAttribute(disabled, true);
+        }
     }
 });
 
