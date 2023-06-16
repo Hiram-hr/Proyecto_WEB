@@ -5,10 +5,15 @@ then
 	exit 1
 fi
 
+if ! [ "$NGINXROOT" -ef "/" ]
+then
+	rm -rf "$NGINXROOT"/*
+fi
+
 for i in ./*
 do
-	if [ "$i" -ef "$1" ]
+	if ! [ "$i" -ef "$0" ]
 	then
-		cp "$i" "$NGINXROOT"
+		cp -r "$i" "$NGINXROOT"
 	fi
 done
