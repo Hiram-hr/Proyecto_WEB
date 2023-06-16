@@ -97,16 +97,20 @@ form.addEventListener("submit", (e) => {
         anadeError(errores, apmat, "El apellido materno es inválido");
 
     colocaSiError(errores, calle, validaLongitud(calle.value, 2, 15));
-    colocaSiError(errores, numero, validaLongitud(numero.value, 5, 5));
-    if(!/^[0-9]*$/.test(numero.value))
-        anadeError(errores, numero, "El dato es inválido");
+    if(!regnom.test(calle.value))
+        anadeError(errores, calle, "Nombre de calle inválido");
+
+    colocaSiError(errores, numero, validaLongitud(numero.value, 1, 8));
+    if(!/^[0-9]+$/.test(numero.value))
+        anadeError(errores, numero, "El numero es inválido");
 
     colocaSiError(errores, colonia, validaLongitud(colonia.value, 1, 20));
-    if(!/^[0-9]{5}$/.test(cp.value))
-        anadeError(errores, cp, "El dato es inválido");
+    if(!regnom.test(colonia.value))
+        anadeError(errores, colonia, "La colonia es inválida");
 
     colocaSiError(errores, alcaldia, validaLongitud(alcaldia.value, 1, Infinity));
 
+    colocaSiError(errores, cp, validaLongitud(cp.value, 5, 5));
     if(!/^[0-9]{5}$/.test(cp.value))
         anadeError(errores, cp, "El código postal es inválido");
 
@@ -122,9 +126,15 @@ form.addEventListener("submit", (e) => {
 
     if(tipoevento.value === '')
         anadeError(errores, tipoevento, "Especifique el evento");
+    
+    if(fecha.value === '')
+        anadeError(errores, fecha, "Especifique la fecha del evento");
+    if(horario.value === '')
+        anadeError(errores, horario, "Especifique el horario del evento");
 
     //colocaSiError(errores, curp, validaLongitud(curp.value, 8, 10));
     //curp, LETRA NUMERO O NUMERO NUMERO
+    colocaSiError(errores, curp, validaLongitud(curp.value, 18, 18));
     if(!/^([A-Z]{4}[0-9]{2}(1[0-2]|0[0-9])([0-2][0-9]|3[0-1])[HM][A-Z]{2}[A-Z]{3}[0-9]{2})|([A-Z]{4}[0-9]{2}(1[0-2]|0[0-9])([0-2][0-9]|3[0-1])[HM][A-Z]{2}[A-Z]{4}[0-9]{1})$/.test(curp.value))
         anadeError(errores, curp, "El curp es inválido");
     
