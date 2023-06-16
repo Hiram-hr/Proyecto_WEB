@@ -126,7 +126,7 @@ form.addEventListener("submit", (e) => {
 
     if(tipoevento.value === '')
         anadeError(errores, tipoevento, "Especifique el evento");
-    
+
     if(fecha.value === '')
         anadeError(errores, fecha, "Especifique la fecha del evento");
     if(horario.value === '')
@@ -137,7 +137,7 @@ form.addEventListener("submit", (e) => {
     colocaSiError(errores, curp, validaLongitud(curp.value, 18, 18));
     if(!/^([A-Z]{4}[0-9]{2}(1[0-2]|0[0-9])([0-2][0-9]|3[0-1])[HM][A-Z]{2}[A-Z]{3}[0-9]{2})|([A-Z]{4}[0-9]{2}(1[0-2]|0[0-9])([0-2][0-9]|3[0-1])[HM][A-Z]{2}[A-Z]{4}[0-9]{1})$/.test(curp.value))
         anadeError(errores, curp, "El curp es inválido");
-    
+
 
     if(errores.size != 0){
         e.preventDefault();
@@ -169,6 +169,10 @@ form.addEventListener("submit", (e) => {
             });
         });
         M.updateTextFields();
+    }
+    else{
+        tipoevento.value = otroevento.value;
+        otroevento.setAttribute(disabled, true);
     }
 });
 
