@@ -11,12 +11,11 @@ const fecha =  document.getElementById("fecha");
 const horario =  document.getElementById("horario");
 const correo =  document.getElementById("correo");
 const telefono =  document.getElementById("telefono");
-const curp =  document.getElementById("curp");
+const rfc =  document.getElementById("rfc");
 const menu = document.getElementById("menu");
 const tipoevento = document.getElementById("evento");
 const otroevento = document.getElementById("otroev");
 var eliminame = new Array();
-
 
 const form = document.getElementById("form");
 const coleccionErrores = document.getElementById("errores");
@@ -80,7 +79,7 @@ function colocaSiError(mapaErrores, objeto, errores){
 }
 
 form.addEventListener("submit", (e) => {
-    var errores = new Map();
+    let errores = new Map();
 
     var regnom = /^[A-Za-záéíóú]+$/;
 
@@ -108,15 +107,15 @@ form.addEventListener("submit", (e) => {
     if(!regnom.test(colonia.value))
         anadeError(errores, colonia, "La colonia es inválida");
 
-    colocaSiError(errores, alcaldia, validaLongitud(alcaldia.value, 1, Infinity));
+    colocaSiError(errores, alcaldia, validaLongitud(alcaldia.value, 1, 45));
 
     colocaSiError(errores, cp, validaLongitud(cp.value, 5, 5));
     if(!/^[0-9]{5}$/.test(cp.value))
         anadeError(errores, cp, "El código postal es inválido");
 
-    colocaSiError(errores, estado, validaLongitud(estado.value, 1, Infinity));
-    colocaSiError(errores, menu, validaLongitud(menu.value, 1, Infinity));
-    colocaSiError(errores, correo, validaLongitud(correo.value, 10, Infinity));
+    colocaSiError(errores, estado, validaLongitud(estado.value, 1, 45));
+    colocaSiError(errores, menu, validaLongitud(menu.value, 1, 45));
+    colocaSiError(errores, correo, validaLongitud(correo.value, 10, 45));
     if(!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(correo.value))
         anadeError(errores, correo, "El correo es inválido");
 
@@ -129,15 +128,14 @@ form.addEventListener("submit", (e) => {
 
     if(fecha.value === '')
         anadeError(errores, fecha, "Especifique la fecha del evento");
+
     if(horario.value === '')
         anadeError(errores, horario, "Especifique el horario del evento");
 
-    //colocaSiError(errores, curp, validaLongitud(curp.value, 8, 10));
-    //curp, LETRA NUMERO O NUMERO NUMERO
-    colocaSiError(errores, curp, validaLongitud(curp.value, 18, 18));
-    if(!/^([A-Z]{4}[0-9]{2}(1[0-2]|0[0-9])([0-2][0-9]|3[0-1])[HM][A-Z]{2}[A-Z]{3}[0-9]{2})|([A-Z]{4}[0-9]{2}(1[0-2]|0[0-9])([0-2][0-9]|3[0-1])[HM][A-Z]{2}[A-Z]{4}[0-9]{1})$/.test(curp.value))
-        anadeError(errores, curp, "El curp es inválido");
-
+    //Es RFC, no CURP!
+    //Especificación del RFC: https://www.sat.gob.mx/cs/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1461172346502&ssbinary=true
+    if(!/^[A-Z]{4}[0-9]{2}(1[0-2]|0[1-9])([1-2][0-9]|0[1-9]|3[0-1])[a-z0-9]{3}$/.test(rfc.value))
+        anadeError(errores, rfc, "El rfc es inválido");
 
     if(errores.size != 0){
         e.preventDefault();
