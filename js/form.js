@@ -34,6 +34,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
+function addOption(texto){//crea un elemento opcion con el texto y valor indicados y se lo añade a la lista desplegable "horario"
+    const elem_option = document.createElement('option');
+    elem_option.text = texto;
+    elem_option.value = texto;
+    horario.add(elem_option);
+}
+
 function validaLongitud(valida, min, max, vacioPermitido){
     let mensajes = [];
     //La longitud es 0 y no se permite dicha longitud, caso especial
@@ -48,6 +55,20 @@ function validaLongitud(valida, min, max, vacioPermitido){
 
     return mensajes;
 }
+
+
+function validaFecha(){//valida que se elija un viernes, sabado o domingo, y actualiza los valores del horario
+    let mensajes = [];
+    const fechaSelec = new Date(fecha.value);
+    const dia = fechaSelec.getDay();
+
+    if (!(dia === 5 | dia === 6 | dia === 0)){//No es un día válido
+        mensajes.push('Día inválido');
+    }
+    return mensajes;
+}
+
+
 /*
 function validaSelect(valida, vacioPermitido){
     let mensajes = [];
@@ -127,8 +148,10 @@ form.addEventListener("submit", (e) => {
     if(tipoevento.value === '')
         anadeError(errores, tipoevento, "Especifique el evento");
 
+    colocaSiError(errores, fecha, validaFecha());
     if(fecha.value === '')
         anadeError(errores, fecha, "Especifique la fecha del evento");
+    
     if(horario.value === '')
         anadeError(errores, horario, "Especifique el horario del evento");
 
@@ -194,5 +217,36 @@ tipoevento.addEventListener("change", (e) => {
     }
     otroevento.setAttribute("hidden", true);
     otroevento.removeAttribute("required");
+});
+
+fecha.addEventListener('change', (e)=>{
+    const fechaSelec = new Date(fecha.value);
+    const dia = fechaSelec.getDay();
+    let instanciaSelect = M.FormSelect.init(horario);
+
+    if (dia === 4){//Es viernes
+        instanciaSelect.destroy();
+        horario.innerHTML = ' ';
+        addOption("12:00pm-5:00pm");
+        addOption("7:00pm-12:00am");
+        instanciaSelect = M.FormSelect.init(horario);
+
+    }else if (dia === 5 ){//es sábado
+        instanciaSelect.destroy();
+        horario.innerHTML = ' ';
+        addOption("2:00pm-7:00pm");
+        addOption("9:00pm-2:00am");
+        instanciaSelect = M.FormSelect.init(horario);
+    }else if (dia === 6){//es domingo
+        instanciaSelect.destroy();
+        horario.innerHTML = ' ';
+        addOption("9:00am-2:00pm");
+        instanciaSelect = M.FormSelect.init(horario);
+    } else {//es un día no válido
+        instanciaSelect.destroy();
+        horario.innerHTML = ' ';
+        addOption("Sin fechas disponibles");
+        instanciaSelect = M.FormSelect.init(horario);
+    }
 });
 
