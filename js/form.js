@@ -15,6 +15,7 @@ const rfc =  document.getElementById("rfc");
 const menu = document.getElementById("menu");
 const tipoevento = document.getElementById("evento");
 const otroevento = document.getElementById("otroev");
+var errores = new Map();
 var eliminame = new Array();
 
 const form = document.getElementById("form");
@@ -33,8 +34,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-function validaLongitud(valida, min, max, vacioPermitido){
-    let mensajes = [];
+function validaLongitud(valida, min, max){
+    console.log(valida);
+    var mensajes = [];
     //La longitud es 0 y no se permite dicha longitud, caso especial
     if(!valida.length && min){
         mensajes.push('Proporciona este dato');
@@ -49,7 +51,7 @@ function validaLongitud(valida, min, max, vacioPermitido){
 }
 /*
 function validaSelect(valida, vacioPermitido){
-    let mensajes = [];
+    var mensajes = [];
     //La longitud es 0 y no se permite dicha longitud, caso especial
     if(valida=="Elija una opción"){
         mensajes.push('Proporciona este dato');
@@ -73,69 +75,54 @@ function anadeError(mapa, objeto, error){
         existe.push(error);
 }
 
+function vald(objetos, regex, min, max){
+    if(!(objetos instanceof Array))
+        objetos = [objetos];
+    console.log(objetos);
+    objetos.forEach((objeto) => {
+        colocaSiError(errores, objeto, validaLongitud(objeto.value, min, max));
+        if(objeto.value === '')
+            return;
+        if(!regex.test(objeto.value)){
+            var nombreobj = document.querySelector("label[for='" + objeto.id + "']").textContent;
+            anadeError(errores, objeto, nombreobj + " es inválido");
+        }
+    });
+}
+
 function colocaSiError(mapaErrores, objeto, errores){
     if(errores.length)
         anadeError(mapaErrores, objeto, errores);
 }
 
 form.addEventListener("submit", (e) => {
-    let errores = new Map();
+    errores.clear();
 
-    var regnom = /^[A-Za-záéíóú]+$/;
+    var regnom = /^[\s,\.A-Za-záéíóúñÁÉÍÓÚÑ]{2,25}$/;
 
-    colocaSiError(errores, nombre, validaLongitud(nombre.value, 2, 15));
-    if(!regnom.test(nombre.value))
-        anadeError(errores, nombre, "El nombre es inválido");
+    vald([nombre, appat, apmat, calle, colonia], regnom, 2, 25);
+    vald([estado, alcaldia, menu, tipoevento], regnom, 2, 25);
+    vald(numero, /^[0-9]{1,8}$/, 1, 8);
+    vald(telefono, /^[0-9]{8,10}$/, 8,10);
+    vald(cp, /^[0-9]{5}$/, 5, 5);
+    vald(rfc, /^[A-Z]{4}[0-9]{2}(1[0-2]|0[1-9])([1-2][0-9]|0[1-9]|3[0-1])[A-Z0-9]{3}$/, 13, 13);
+    if(!errores.has(rfc)){
+        var hoy = new Date();
+        var rfcstr = rfc.value;
+        var an = parseInt(rfcstr.substr(4,2));
+        console.log(an);
+        an += (hoy.getFullYear() - (hoy.getFullYear() % 100)) - ((an < (hoy.getFullYear() % 100)) ? (0) : (100));
 
-    colocaSiError(errores, appat, validaLongitud(appat.value, 2, 15));
-    if(!regnom.test(appat.value))
-        anadeError(errores, appat, "El apellido paterno es inválido");
-
-    colocaSiError(errores, apmat, validaLongitud(apmat.value, 2, 15));
-    if(!regnom.test(apmat.value))
-        anadeError(errores, apmat, "El apellido materno es inválido");
-
-    colocaSiError(errores, calle, validaLongitud(calle.value, 2, 15));
-    if(!regnom.test(calle.value))
-        anadeError(errores, calle, "Nombre de calle inválido");
-
-    colocaSiError(errores, numero, validaLongitud(numero.value, 1, 8));
-    if(!/^[0-9]+$/.test(numero.value))
-        anadeError(errores, numero, "El numero es inválido");
-
-    colocaSiError(errores, colonia, validaLongitud(colonia.value, 1, 20));
-    if(!regnom.test(colonia.value))
-        anadeError(errores, colonia, "La colonia es inválida");
-
-    colocaSiError(errores, alcaldia, validaLongitud(alcaldia.value, 1, 45));
-
-    colocaSiError(errores, cp, validaLongitud(cp.value, 5, 5));
-    if(!/^[0-9]{5}$/.test(cp.value))
-        anadeError(errores, cp, "El código postal es inválido");
-
-    colocaSiError(errores, estado, validaLongitud(estado.value, 1, 45));
-    colocaSiError(errores, menu, validaLongitud(menu.value, 1, 45));
-    colocaSiError(errores, correo, validaLongitud(correo.value, 10, 45));
-    if(!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(correo.value))
-        anadeError(errores, correo, "El correo es inválido");
-
-    colocaSiError(errores, telefono, validaLongitud(telefono.value, 8, 10));
-    if(!/^[0-9]{8,10}$/.test(telefono.value))
-        anadeError(errores, telefono, "El teléfono es inválido");
-
-    if(tipoevento.value === '')
-        anadeError(errores, tipoevento, "Especifique el evento");
-
-    if(fecha.value === '')
-        anadeError(errores, fecha, "Especifique la fecha del evento");
-
-    if(horario.value === '')
-        anadeError(errores, horario, "Especifique el horario del evento");
-
-    //Es RFC, no CURP!
-    //Especificación del RFC: https://www.sat.gob.mx/cs/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1461172346502&ssbinary=true
-    if(!/^[A-Z]{4}[0-9]{2}(1[0-2]|0[1-9])([1-2][0-9]|0[1-9]|3[0-1])[a-z0-9]{3}$/.test(rfc.value))
-        anadeError(errores, rfc, "El rfc es inválido");
+        var mes = parseInt(rfcstr.substr(6, 2)) - 1;
+        var dia = parseInt(rfcstr.substr(8, 2));
+        var fechanac = new Date(an, mes, dia);
+        var edad = Math.abs(hoy - fechanac) / (1000*60*60*24*365);
+        if( edad < 18 )
+            anadeError(errores, rfc, "Los menores de edad no pueden contratar eventos");
+    }
+    vald(correo, /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/, 6, 254)
+    if(tipoevento.value == 'otro')
+        vald(otroevento, regnom, 2, 25);
 
     if(errores.size != 0){
         e.preventDefault();
@@ -155,7 +142,7 @@ form.addEventListener("submit", (e) => {
             eErrores.forEach((textoError) => {
                 mensajeError += textoError + "; ";
             });
-            let reganaText = document.createElement("span");
+            var reganaText = document.createElement("span");
             reganaText.classList.add("helper-text");
             reganaText.setAttribute("data-error", mensajeError);
             elemento.after(reganaText);

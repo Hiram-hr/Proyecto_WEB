@@ -1,4 +1,5 @@
 NGINXROOT="/usr/share/nginx/mirasahi/"
+NOINSTALA="sql"
 if [ "$EUID" != "0" ]
 then
 	echo "Necesitas permisos de administrador para instalar"
@@ -10,10 +11,23 @@ then
 	rm -rf "$NGINXROOT"/*
 fi
 
-for i in ./*
+for instala in ./*
 do
-	if ! [ "$i" -ef "$0" ]
+	if ! [ "$instala" -ef "$0" ]
 	then
-		cp -r "$i" "$NGINXROOT"
+		DECISION="i"
+		for salta in $NOINSTALA
+		do
+			if [ "$instala" -ef "$salta" ]
+			then
+				DECISION="n"
+				break
+			fi
+		done
+
+		if [ $DECISION == "i" ]
+		then
+			cp -r "$instala" "$NGINXROOT"
+		fi
 	fi
 done
