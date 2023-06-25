@@ -36,24 +36,23 @@ create table menuhora(
 );
 
 create table registros(
-    id_registro char(24) not null primary key,
+    id_registro char(28) not null primary key,
     curp char(18) not null,
-    nombre varchar(15) not null,
-    appat varchar(15) not null,
-    apmat varchar(15) not null,
-    calle varchar(15) not null,
+    nombre varchar(25) not null,
+    appat varchar(25) not null,
+    apmat varchar(25) not null,
+    calle varchar(25) not null,
     numero decimal(8) not null,
-    colonia varchar(20) not null,
-    id_alcaldia int,
+    colonia varchar(25),
+    id_alcaldia int not null,
     cp decimal(5) not null,
     id_estado int not null,
     correo nvarchar(45) not null,
     telefono decimal(10) not null,
-    fecha char(12) not null,
-    horario char(10) not null,
-    personas decimal(2) not null,
+    personas decimal(3) not null,
     id_hora int not null,
     id_evento int not null,
+    otroev varchar(25),
     id_menu int not null,
     dia date not null,
     foreign key (id_menu) references menu (id_menu),
@@ -70,6 +69,7 @@ create table administrador(
 
 );
 
+insert into evento(evento) values ("Otro");
 insert into evento(evento) values ("Bautizo");
 insert into evento(evento) values ("Primera Comunión");
 insert into evento(evento) values ("XV Años");
@@ -80,11 +80,15 @@ insert into salon(salon) values ("BlackDJs");
 insert into salon(salon) values ("Rank Audio DJs");
 insert into salon(salon) values ("Jardín Shady");
 
-insert into menuhora (id_salon, diasemana, hora) values (1, 5, "12:00:00");
-insert into menuhora (id_salon, diasemana, hora) values (1, 5, "19:00:00");
-insert into menuhora (id_salon, diasemana, hora) values (2, 6, "14:00:00");
-insert into menuhora (id_salon, diasemana, hora) values (2, 6, "21:00:00");
-insert into menuhora (id_salon, diasemana, hora) values (3, 7, "21:00:00");
+insert into menuhora (id_salon, diasemana, hora) values (1, 6, "12:00:00");
+insert into menuhora (id_salon, diasemana, hora) values (1, 6, "19:00:00");
+insert into menuhora (id_salon, diasemana, hora) values (2, 6, "12:00:00");
+insert into menuhora (id_salon, diasemana, hora) values (2, 6, "19:00:00");
+insert into menuhora (id_salon, diasemana, hora) values (1, 7, "14:00:00");
+insert into menuhora (id_salon, diasemana, hora) values (1, 7, "21:00:00");
+insert into menuhora (id_salon, diasemana, hora) values (2, 7, "14:00:00");
+insert into menuhora (id_salon, diasemana, hora) values (2, 7, "21:00:00");
+insert into menuhora (id_salon, diasemana, hora) values (3, 1, "21:00:00");
 
 insert into menu(menu) values ("Económico");
 insert into menu(menu) values ("Ejecutivo");

@@ -2,8 +2,8 @@
  include_once('../secretos/conexionsql.php');
  $id_salon = $_GET['id_salon'];
  $dia = $_GET['dia'];
- $horastmt = $conexion->prepare("select menuhora.id_hora, menuhora.hora from menuhora left join registros on menuhora.id_hora where (id_salon = ?) AND (diasemana = DAYOFWEEK(?)) AND (dia IS NULL OR dia != ?);");
- $horastmt->bind_param("iss", $id_salon, $dia, $dia);
+ $horastmt = $conexion->prepare("select menuhora.id_hora, menuhora.hora from menuhora left join registros on menuhora.id_hora = registros.id_hora where (id_salon = ?) AND (diasemana = DAYOFWEEK(?)) AND (dia IS NULL);");
+ $horastmt->bind_param("is", $id_salon, $dia);
  $horastmt->execute();
  $envia = [];
  $horas = mysqli_stmt_get_result($horastmt);
