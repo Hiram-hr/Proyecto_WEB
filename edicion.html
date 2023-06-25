@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="css/miEstilo.css"  media="screen,projection"/>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8">
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1 0 auto;
+    }
+  </style>
+</head>
+
+<body class="gradiente">
+    <div class="col s12" style="background-color: #4dd0e1;">
+        <h2 class="header col s12 light center">CONTRATOS</h5>
+    </div>
+
+    <div class="container row">
+        <div class="col s12">
+            <table id="registros">
+                <thead>
+                  <tr>
+                      <th>ID registro</th>
+                      <th>CURP</th>
+                      <th>Nombre</th>
+                      <th>Apellido Paterno</th>
+                      <th>Correo</th>
+                      <th>Teléfono</th>
+                      <th>Hora Inicio</th>
+                      <th>día</th>
+                      <th></th>
+                  </tr>
+                </thead>
+        
+                <tbody>
+                <!--Aquí se colocan los registros-->
+                  <tr>
+                    <td id="id"></td>
+                    <td id="curp"></td>
+                    <td id="nombre"></td>
+                    <td id="apPat"></td>
+                    <td id="correo"></td>
+                    <td id="telefono"></td>
+                    <td id="horaInicio"></td>
+                    <td id="dia"></td>
+                    <td id="editar"> <button class="btn waves-effect waves-light">Editar</button> </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</body>
+</html>

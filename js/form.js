@@ -219,6 +219,7 @@ tipoevento.addEventListener("change", (e) => {
     otroevento.removeAttribute("required");
 });
 
+//evento que hace que el horario cambie dependiendo el dia que se elija en fecha
 fecha.addEventListener('change', (e)=>{
     const fechaSelec = new Date(fecha.value);
     const dia = fechaSelec.getDay();
@@ -249,4 +250,18 @@ fecha.addEventListener('change', (e)=>{
         instanciaSelect = M.FormSelect.init(horario);
     }
 });
+
+const btnAceptar = document.getElementById("aceptar");
+const btnModificar = document.getElementById("modificar");
+
+function Aceptar(){
+    console.log("Los datos se han guardado en la base de datos");
+    /* GUARDAR DATOS EN LA BASE DE DATOS*/
+}
+
+function Modificar(){
+    window.location.href = "form.html";
+    /* Hacer que los datos de precarguen*/
+}
+
 
