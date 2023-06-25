@@ -20,11 +20,20 @@
                  </a>
             </div>
          </header>
+        <div id="confirma" class="modal modal-fixed-footer">
+        <div class="modal-content">
+        <h4>Confirmación de los datos de la contratación</h4>
+        <p id="datos">A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+        </div>
+        </div>
         <div class="row container">
             <h2 class="center">Contratación</h2>
             <div id='errores' class='row'>
             </div>
-            <form class="col s10 offset-s1" action="index.html" method="post" id="form">
+            <form class="col s10 offset-s1" id="form">
                 <fieldset>
                     <legend>Contacto</legend>
                     <!--<div class="row">-->
@@ -84,22 +93,6 @@
 
                             <select name="alcaldia" id="alcaldia">
                                 <option hidden disabled selected value>Elija una opción</option>
-                                <option value="Azcapotzalco">Azcapotzalco</option>
-                                <option value="Coyoacan">Coyoacán</option>
-                                <option value="Cuajimalpa">Cuajimalpa de Morelos</option>
-                                <option value="GustavoA.Madero">Gustavo A. Madero</option>
-                                <option value="Iztacalco">Iztacalco</option>
-                                <option value="Iztapalapa">Iztapalapa</option>
-                                <option value="LaMagdalenaContreras">La Magdalena Contreras</option>
-                                <option value="MilpaAlta">Milpa Alta</option>
-                                <option value="AlvaroObregon">Álvaro Obregón</option>
-                                <option value="Tlahuac">Tláhuac</option>
-                                <option value="Tlalpan">Tlalpan</option>
-                                <option value="Xochimilco">Xochimilco</option>
-                                <option value="BenitoJuarez">Benito Juárez</option>
-                                <option value="Cuauhtemoc">Cuauhtémoc</option>
-                                <option value="MiguelHidalgo">Miguel Hidalgo</option>
-                                <option value="VenustianoCarranza">Venustiano Carranza</option>
                             </select>
                             <label for="alcaldia">Alcaldía/Municipio</label>
                         </div>
@@ -118,38 +111,6 @@
 
                             <select name="estado" id="estado">
                                 <option hidden disabled selected value>Elija una opción</option>
-                                <option value="1">Aguascalientes</option>
-                                <option value="2">Baja California</option>
-                                <option value="3">Baja California Sur</option>
-                                <option value="4">Campeche</option>
-                                <option value="5">Coahuila</option>
-                                <option value="6">Colima</option>
-                                <option value="7">Chiapas</option>
-                                <option value="8">Chihuahua</option>
-                                <option value="9">Distrito Federal</option>
-                                <option value="10">Durango</option>
-                                <option value="11">Guanajuato</option>
-                                <option value="12">Guerrero</option>
-                                <option value="13">Hidalgo</option>
-                                <option value="14">Jalisco</option>
-                                <option value="15">México</option>
-                                <option value="16">Michoacán</option>
-                                <option value="17">Morelos</option>
-                                <option value="18">Nayarit</option>
-                                <option value="19">Nuevo León</option>
-                                <option value="20">Oaxaca</option>
-                                <option value="21">Puebla</option>
-                                <option value="22">Querétaro</option>
-                                <option value="23">Quintana Roo</option>
-                                <option value="24">San Luis Potosí</option>
-                                <option value="25">Sinaloa</option>
-                                <option value="26">Sonora</option>
-                                <option value="27">Tabasco</option>
-                                <option value="28">Tamaulipas</option>
-                                <option value="29">Tlaxcala</option>
-                                <option value="30">Veracruz</option>
-                                <option value="31">Yucatán</option>
-                                <option value="32">Zacatecas</option>
                             </select>
                             <label for="estado">Entidad Federativa</label>
                         </div>
@@ -180,8 +141,8 @@
                         <div class="input-field col s12 m6">
 
                             <i class="material-icons prefix">person</i>
-                            <input id="rfc" type="text" name="rfc" class="validate">
-                            <label for="rfc">rfc</label>
+                            <input id="curp" type="text" name="curp" class="validate">
+                            <label for="curp">CURP</label>
                     </div>
 <!--Parte Raul-->
                 </fieldset>
@@ -195,22 +156,17 @@
                             <label class="active" for="fecha">FECHA DEL EVENTO</label>
                             <input type="text" class="datepicker" name="fecha" id="fecha">
                         </div>
-                        <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">access_time</i>
-                            <label class="active" for="horario">HORARIO</label>
-                            <input id="horario" name="horario" class="timepicker">
+                        <div class="input-field col s12 m6 l4">
+                            <select name="horario" id="horario">
+                                <option hidden disabled selected value>Elija una opción</option>
+                            </select>
+                            <label for="horario">Horario</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12 m6 l4">
                             <select name="evento" id="evento">
                                 <option hidden disabled selected value>Elija un tipo de evento</option>
-                                <option value="bautizo">Bautizo</option>
-                                <option value="comunion">Primera Comunión</option>
-                                <option value="xv">XV Años</option>
-                                <option value="boda">Boda</option>
-                                <option value="cumple">Cumpleaños</option>
-                                <option value="otro">Otro</option>
                                 <!--input id="OpcOtro" type="text" name="OpcOtro" class="validate"-->
                             </select>
                             
@@ -231,10 +187,14 @@
                         <div class="input-field col s12 m6 l4">
                             <select name="menu" id="menu">
                                 <option hidden disabled selected value>Elija una opción</option>
-                                <option value="MenuEconomico">Menú económico</option>
-                                <option value="MenuEjecutivo">Menú ejecutivo</option>
                             </select>
                             <label for="menu">Menú</label>
+                        </div>
+                        <div class="input-field col s12 m6 l4">
+                            <select name="salon" id="salon">
+                                <option hidden disabled selected value>Elija una opción</option>
+                            </select>
+                            <label for="salon">Salón</label>
                         </div>
                     </div>
                 </fieldset>
@@ -249,11 +209,11 @@
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
-                </div>
+                </div>s
             </form>
         </div>
         <!--JavaScript at end of body for optimized loading-->
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="js/jquery-3.7.0.min.js"></script>
         <script src="js/materialize.js"></script>
         <script src="js/init.js"></script>
         <script src="js/form.js"></script>

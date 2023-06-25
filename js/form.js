@@ -11,10 +11,12 @@ const fecha =  document.getElementById("fecha");
 const horario =  document.getElementById("horario");
 const correo =  document.getElementById("correo");
 const telefono =  document.getElementById("telefono");
-const rfc =  document.getElementById("rfc");
+const curp =  document.getElementById("curp");
 const menu = document.getElementById("menu");
 const tipoevento = document.getElementById("evento");
 const otroevento = document.getElementById("otroev");
+const salon = document.getElementById("salon");
+const confirma = document.getElementById("confirma");
 var errores = new Map();
 var eliminame = new Array();
 
@@ -23,6 +25,56 @@ const coleccionErrores = document.getElementById("errores");
 const boton = document.getElementById("btn");
 
 document.addEventListener("DOMContentLoaded", function() {
+    optselect = {};
+    $.ajaxSetup({ async: false });
+    $.getJSON("php/geteventos.php", function(result){
+        $.each(result, function(val, txt){
+            $(tipoevento).append($("<option>", {
+                value:val,
+                text:txt
+            }));
+        });
+    });
+
+   $.getJSON("php/getalcaldias.php", function(result){
+        $.each(result, function(val, txt){
+            $(alcaldia).append($("<option>", {
+                value:val,
+                text:txt
+            }));
+        });
+    });
+
+   $.getJSON("php/getsalones.php", function(result){
+        $.each(result, function(val, txt){
+            $(salon).append($("<option>", {
+                value:val,
+                text:txt
+            }));
+        });
+    });
+
+   $.getJSON("php/getestados.php", function(result){
+        $.each(result, function(val, txt){
+            $(estado).append($("<option>", {
+                value:val,
+                text:txt
+            }));
+        });
+    });
+
+    $.getJSON("php/getmenu.php", function(result){
+        $.each(result, function(val, txt){
+            $(menu).append($("<option>", {
+                value:val,
+                text:txt
+            }));
+        });
+    });
+
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, optselect);
+
     //Inicializar elemento de fecha del form
     const hoy = new Date();
     const options = {"format":"yyyy-mm-dd",
@@ -101,26 +153,26 @@ form.addEventListener("submit", (e) => {
     var regnom = /^[\s,\.A-Za-záéíóúñÁÉÍÓÚÑ]{2,25}$/;
 
     vald([nombre, appat, apmat, calle, colonia], regnom, 2, 25);
-    vald([estado, alcaldia, menu, tipoevento], regnom, 2, 25);
+    vald([estado, alcaldia, menu, tipoevento], /^[1-9]+$/, 1, Infinity);
     vald(numero, /^[0-9]{1,8}$/, 1, 8);
     vald(telefono, /^[0-9]{8,10}$/, 8,10);
     vald(cp, /^[0-9]{5}$/, 5, 5);
-    vald(rfc, /^[A-Z]{4}[0-9]{2}(1[0-2]|0[1-9])([1-2][0-9]|0[1-9]|3[0-1])[A-Z0-9]{3}$/, 13, 13);
-    if(!errores.has(rfc)){
+    vald(curp, /^[A-Z]{4}[0-9]{2}(1[0-2]|0[1-9])([1-2][0-9]|0[1-9]|3[0-1])(H|M)[A-Z]{2}[A-Z]{3}[0-9]{2}$/, 13, 13);
+    if(!errores.has(curp)){
         var hoy = new Date();
-        var rfcstr = rfc.value;
-        var an = parseInt(rfcstr.substr(4,2));
+        var curpstr = curp.value;
+        var an = parseInt(curpstr.substr(4,2));
         console.log(an);
         an += (hoy.getFullYear() - (hoy.getFullYear() % 100)) - ((an < (hoy.getFullYear() % 100)) ? (0) : (100));
 
-        var mes = parseInt(rfcstr.substr(6, 2)) - 1;
-        var dia = parseInt(rfcstr.substr(8, 2));
+        var mes = parseInt(curpstr.substr(6, 2)) - 1;
+        var dia = parseInt(curpstr.substr(8, 2));
         var fechanac = new Date(an, mes, dia);
         var edad = Math.abs(hoy - fechanac) / (1000*60*60*24*365);
         if( edad < 18 )
-            anadeError(errores, rfc, "Los menores de edad no pueden contratar eventos");
+            anadeError(errores, curp, "Los menores de edad no pueden contratar eventos");
     }
-    vald(correo, /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/, 6, 254)
+    vald(correo, /^[a-zA-Z0-9._\-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/, 6, 254)
     if(tipoevento.value == 'otro')
         vald(otroevento, regnom, 2, 25);
 
@@ -159,6 +211,7 @@ form.addEventListener("submit", (e) => {
         if(tipoevento.value == 'otro'){
             tipoevento.value = otroevento.value;
             otroevento.setAttribute(disabled, true);
+
         }
     }
 });

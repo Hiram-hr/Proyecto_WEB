@@ -1,0 +1,14 @@
+<?php
+ include_once('../secretos/conexionsql.php');
+ $elementosmenu = $conexion->query("select*from alcaldia");
+ $envia = [];
+ if($elementosmenu){
+    while($row = mysqli_fetch_array($elementosmenu)){
+        $envia[$row["id_alcaldia"]] = $row["alcaldia"];
+    }
+    echo json_encode($envia);
+ }
+ else{
+    echo json_encode([]);
+ }
+?>
