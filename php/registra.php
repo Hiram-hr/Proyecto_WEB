@@ -77,7 +77,6 @@
  $menuhora = $_POST["menuhora"];
  $dia = $_POST["dia"];
  $id = $curp.str_replace("-","",$dia).$menuhora;
- echo $id." ".$dnum["salon"]." ".$menuhora;
  $conexion->begin_transaction();
  $horastmt = $conexion->prepare("select id_menuhora from registros where id_menuhora = ? AND dia = ? AND id_registro != ? for update");
  $horastmt->bind_param("iss", $rnum["dia"], $menuhora, $id);
@@ -90,7 +89,7 @@
  }
 
  $registrastmt = $conexion->prepare("replace into registros values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
- $registrastmt->bind_param("ssssssisiiisiiiisis", $id, $curp, $dtext["nombre"], $dtext["appat"], $dtext["apmat"], $dtext["calle"], $numero, $dtext["colonia"], $dnum["alcaldia"], $cp, $dnum["estado"], $correo, $telefono, $personas, $menuhora, $dnum["evento"], $otroev, $dnum["menu"], $dia);
+ $registrastmt->bind_param("ssssssisisisiiiisis", $id, $curp, $dtext["nombre"], $dtext["appat"], $dtext["apmat"], $dtext["calle"], $numero, $dtext["colonia"], $dnum["alcaldia"], $cp, $dnum["estado"], $correo, $telefono, $personas, $menuhora, $dnum["evento"], $otroev, $dnum["menu"], $dia);
  $registrastmt->execute();
  $conexion->commit();
  echo json_encode(["resultado" => "exito"]);

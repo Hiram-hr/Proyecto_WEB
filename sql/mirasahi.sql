@@ -45,7 +45,7 @@ create table registros(
     numero decimal(8) not null,
     colonia varchar(25),
     id_alcaldia int,
-    cp decimal(5) not null,
+    cp char(5) not null,
     id_estado int not null,
     correo nvarchar(45) not null,
     telefono decimal(10) not null,

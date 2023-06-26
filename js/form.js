@@ -107,6 +107,13 @@ document.addEventListener("DOMContentLoaded", function() {
             $.each(ndatos, function(val, txt){
                 $("#"+val).val(txt);
             });
+            if(ndatos["evento"] == '1'){
+                $(otroev).prop("hidden", false);
+            }
+            if(ndatos["estado"] == '1'){
+                $(alcaldia).prop("disabled", false);
+            }
+            $('label').addClass('active');
 
         });
     }
