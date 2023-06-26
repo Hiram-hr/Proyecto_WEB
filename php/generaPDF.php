@@ -2,29 +2,47 @@
 //Generación del pdf contratación DJ
 //Agregamos la libreria
 require('library/fpdf.php');
-//Obtenemos los datos:
-$nombre = "Karlo"; //$_SESSION["nombre"];
-$ap = "Paramo"; //$_SESSION["ap"];
-$am = "Chin"; //$_SESSION["am"];
-$calle = "Lomas"; //$_SESSION["calle"];
-$numero = "2"; //$_SESSION["numero"];
-$colonia = "Villa Real"; //$_SESSION["colonia"];
-$alcaldia = "Nuncia"; //$_SESSION["alcaldia"];
-$cp = "45336"; // $_SESSION["cp"];
-$entidades = "Tlaxcala"; // $_SESSION["entidades"];
-$correo = "correo@ghgh.com"; //$_SESSION["correo"];
-$telefono = "1234567890"; //$_SESSION["telefono"];
-$curp = "PACK010203JKMMPLA2"; //$_SESSION["curp"];
-//DEL EVENTO:
-$fecha = "10/06/23"; //$_SESSION["fecha"];
-$horario = "14:00 a 19:00"; //$_SESSION["horario"];
-$evento = "Baile"; //$_SESSION["evento"];
-$invitados = "100"; //$_SESSION["invitados"];
-$menu = "economico"; //$_SESSION["menu"];
-$folio = "PACK010203JKMMPLA2100623"; //$_SESSION["folio"];
-$sala = "Shady"; //$_SESSION["sala"];
+ include_once('../secretos/conexionsql.php');
+ if(!array_key_exists("id", $_GET)){
+     echo json_encode(["resultado" => "error", "causa" => "id"]);
+     exit();
+ }
+ $id = $_GET["id"];
+ $datosstmt = $conexion->prepare("select id_registro, curp, nombre, appat, apmat, calle, numero, colonia, cp, estado, correo, telefono, personas, evento, otroev, dia, hora, evento, salon, menu  from registros natural join menuhora natural join evento natural join salon natural join estado natural join menu where id_registro = ?");
+ $datosstmt->bind_param("s", $id);
+ $datosstmt->execute();
+ $datos = mysqli_stmt_get_result($datosstmt);
+ if(!$datos){
+    header("HTTP/1.0 404 Not Found");
+    die();
+ }
 
-// Clase extendida de FPDF para agregar encabezado y pie de página personalizados
+  if($datos->num_rows == 0){
+    header("HTTP/1.0 404 Not Found");
+    die();
+ }
+
+ $row = mysqli_fetch_array($datos);
+//Obtenemos los datos:
+$nombre = $row["nombre"]; //$_SESSION["nombre"];
+$ap = $row["appat"]; //$_SESSION["ap"];
+$am = $row["apmat"]; //$_SESSION["am"];
+$calle = $row["calle"]; //$_SESSION["calle"];
+$numero = $row["numero"]; //$_SESSION["numero"];
+$colonia = $row["colonia"]; //$_SESSION["colonia"];
+$cp = $row["cp"]; // $_SESSION["cp"];
+$entidades = $row["estado"]; // $_SESSION["entidades"];
+$correo = $row["correo"]; //$_SESSION["correo"];
+$telefono = $row["telefono"]; //$_SESSION["telefono"];
+$curp = $row["curp"]; //$_SESSION["curp"];
+//DEL EVENTO:
+$fecha = $row["dia"]; //$_SESSION["fecha"];
+$horario = $row["hora"]; //$_SESSION["horario"];
+$evento = $row["evento"]; //$_SESSION["evento"];
+$invitados = $row["personas"]; //$_SESSION["invitados"];
+$menu = $row["menu"]; //$_SESSION["menu"];
+$folio = $row["id_registro"]; //$_SESSION["folio"];
+$sala = $row["salon"]; //$_SESSION["sala"];
 class PDF extends FPDF
 {
     function Header(){
@@ -72,9 +90,6 @@ $pdf->Cell(0, 12, mb_convert_encoding($numero, 'ISO-8859-1', 'UTF-8'), 0, 1, 'L'
 $pdf->Cell(19, 12, 'Colonia:', 0, 0, 'L', true);
 $pdf->Cell(0, 12, mb_convert_encoding($colonia, 'ISO-8859-1', 'UTF-8'), 0, 1, 'L', true);
 
-$pdf->Cell(19, 12, mb_convert_encoding('Alcaldía: ', 'ISO-8859-1', 'UTF-8'), 0, 0, 'L', true);
-$pdf->Cell(0, 12, mb_convert_encoding($alcaldia, 'ISO-8859-1', 'UTF-8'), 0, 1, 'L', true);
-
 $pdf->Cell(32, 12, mb_convert_encoding('Código Postal:', 'ISO-8859-1', 'UTF-8'), 0, 0, 'L', true);
 $pdf->Cell(0, 12, mb_convert_encoding($cp, 'ISO-8859-1', 'UTF-8'), 0, 1, 'L', true);
 
@@ -111,12 +126,6 @@ $pdf->Cell(0, 12, mb_convert_encoding($menu, 'ISO-8859-1', 'UTF-8'), 0, 1, 'L', 
 $pdf->Cell(14, 12, 'Folio:', 0, 0, 'L', true);
 $pdf->Cell(0, 12, mb_convert_encoding($folio, 'ISO-8859-1', 'UTF-8'), 0, 1, 'L', true);
 
-$pdf->Output('formulario.pdf', 'I');
+$pdf->Output('comprobante.pdf', 'I');
 
-//**********************************************************
-// ESPACIO PARA CERRAR LA CONEXION Y LIBERAR RECURSOS la conexión y liberar recursos
-//**********************************************************   
-    //$stmt->close(); eliminar esto
-    //$enlace->close(); eliminar esto
-//**********************************************************
 ?>
