@@ -28,7 +28,7 @@ create table evento(
 );
 
 create table menuhora(
-    id_horario int not null primary key auto_increment,
+    id_menuhora int not null primary key auto_increment,
     id_salon int not null,
     diasemana int not null,
     hora time not null,
@@ -44,13 +44,13 @@ create table registros(
     calle varchar(25) not null,
     numero decimal(8) not null,
     colonia varchar(25),
-    id_alcaldia int not null,
+    id_alcaldia int,
     cp decimal(5) not null,
     id_estado int not null,
     correo nvarchar(45) not null,
     telefono decimal(10) not null,
     personas decimal(3) not null,
-    id_horario int not null,
+    id_menuhora int not null,
     id_evento int not null,
     otroev varchar(25),
     id_menu int not null,
@@ -58,7 +58,7 @@ create table registros(
     foreign key (id_menu) references menu (id_menu),
     foreign key (id_alcaldia) references alcaldia (id_alcaldia),
     foreign key (id_estado) references estado (id_estado),
-    foreign key (id_horario) references menuhora (id_horario),
+    foreign key (id_menuhora) references menuhora (id_menuhora),
     foreign key (id_evento) references evento (id_evento)
 );
 

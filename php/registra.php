@@ -2,7 +2,7 @@
  include_once('../secretos/conexionsql.php');
  $ptext = "/^[\s,\.A-Za-záéíóúñÁÉÍÓÚÑ]{2,25}$/";
  $rtext = array("nombre", "appat", "apmat", "calle", "colonia");
- $rnum = array("estado", "alcaldia", "menu", "evento", "salon");
+ $rnum = array("estado", "menu", "evento", "salon");
  $dtext = array();
  $dnum = array();
  foreach ($rtext as &$txt){
@@ -30,6 +30,14 @@
  }
  else{
       $otroev = "";
+ }
+
+ if($dnum["estado"] == 1){
+      if(!preg_match("/^[0-9]+$/",$_POST["alcaldia"])){
+         echo json_encode(["resultado" => "error", "causa" => "alcaldia"]);
+         exit();
+      }
+      $dnum["alcaldia"] = $_POST["alcaldia"];
  }
 
  $numero = $_POST["numero"];
@@ -66,13 +74,13 @@
       exit();
  }
 
- $fecha = $_POST["fecha"];
- $horario = $_POST["horario"];
- $id = $curp.str_replace("-","",$fecha).str_replace(":","",$horario);
- echo $id." ".$dnum["salon"]." ".$fecha;
+ $menuhora = $_POST["menuhora"];
+ $dia = $_POST["dia"];
+ $id = $curp.str_replace("-","",$dia).$menuhora;
+ echo $id." ".$dnum["salon"]." ".$menuhora;
  $conexion->begin_transaction();
- $horastmt = $conexion->prepare("select id_horario from registros where id_horario = ? AND dia = ? AND id_registro != ? for update");
- $horastmt->bind_param("iss", $rnum["horario"], $fecha, $id);
+ $horastmt = $conexion->prepare("select id_menuhora from registros where id_menuhora = ? AND dia = ? AND id_registro != ? for update");
+ $horastmt->bind_param("iss", $rnum["dia"], $menuhora, $id);
  $horastmt->execute();
  $horas = mysqli_stmt_get_result($horastmt);
  if(($horas->num_rows != 0)){
@@ -82,7 +90,7 @@
  }
 
  $registrastmt = $conexion->prepare("replace into registros values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
- $registrastmt->bind_param("ssssssisiiisiiiisis", $id, $curp, $dtext["nombre"], $dtext["appat"], $dtext["apmat"], $dtext["calle"], $numero, $dtext["colonia"], $dnum["alcaldia"], $cp, $dnum["estado"], $correo, $telefono, $personas, $horario, $dnum["evento"], $otroev, $dnum["menu"], $fecha);
+ $registrastmt->bind_param("ssssssisiiisiiiisis", $id, $curp, $dtext["nombre"], $dtext["appat"], $dtext["apmat"], $dtext["calle"], $numero, $dtext["colonia"], $dnum["alcaldia"], $cp, $dnum["estado"], $correo, $telefono, $personas, $menuhora, $dnum["evento"], $otroev, $dnum["menu"], $dia);
  $registrastmt->execute();
  $conexion->commit();
  echo json_encode(["resultado" => "exito"]);

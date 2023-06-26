@@ -7,8 +7,8 @@ const colonia = document.getElementById("colonia");
 const cp = document.getElementById("cp");
 const alcaldia =  document.getElementById("alcaldia");
 const estado =  document.getElementById("estado");
-const fecha =  document.getElementById("fecha");
-const horario =  document.getElementById("horario");
+const dia =  document.getElementById("dia");
+const hora =  document.getElementById("menuhora");
 const correo =  document.getElementById("correo");
 const telefono =  document.getElementById("telefono");
 const curp =  document.getElementById("curp");
@@ -27,9 +27,14 @@ const form = document.getElementById("form");
 const coleccionErrores = document.getElementById("errores");
 const boton = document.getElementById("btn");
 
-function rk(obj, ok, nk){
-    obj[nk] = obj[ok];
-    delete obj[ok];
+function init(){
+    options = {};
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, options);
+    var elems = document.querySelectorAll('.slider');
+    var instances = M.Slider.init(elems, options);
+    var elems = document.querySelectorAll('.timepicker');
+    var instances = M.Timepicker.init(elems, options);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -91,24 +96,32 @@ document.addEventListener("DOMContentLoaded", function() {
             var ndatos = new Map();
             $.each(result, function(val, txt){
                 nval = val.replace(/^id_/, '');
-                ndatos[nval] = txt;
+                if(isNaN(nval))
+                    ndatos[nval] = txt;
             });
             salon.value = ndatos["salon"];
+            dia.value = ndatos["dia"];
+            colocaHoras();
+            ndatos.delete("salon");
+            ndatos.delete("dia")
+            $.each(ndatos, function(val, txt){
+                $("#"+val).val(txt);
+            });
 
         });
     }
-
+    init();
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems, optselect);
 
-    //Inicializar elemento de fecha del form
+    //Inicializar elemento de dia del form
     const hoy = new Date();
     const options = {"format":"yyyy-mm-dd",
                      "minDate": hoy,
                      "defaultDate": hoy,
                      "setDefautDate": true
                      };
-    M.Datepicker.init(fecha, options);
+    M.Datepicker.init(dia, options);
 
 });
 
@@ -179,7 +192,7 @@ botonregistra.addEventListener("click", (e) => {
     var regnom = /^[\s,\.A-Za-záéíóúñÁÉÍÓÚÑ]{2,25}$/;
 
     vald([nombre, appat, apmat, calle, colonia], regnom, 2, 25);
-    vald([estado, menu, evento, salon, personas,horario], /^[0-9]+$/, 1, Infinity);
+    vald([estado, menu, evento, salon, personas, hora], /^[0-9]+$/, 1, Infinity);
     vald(numero, /^[0-9]{1,8}$/, 1, 8);
     vald(telefono, /^[0-9]{8,10}$/, 8,10);
     vald(cp, /^[0-9]{5}$/, 5, 5);
@@ -193,8 +206,8 @@ botonregistra.addEventListener("click", (e) => {
 
         var mes = parseInt(curpstr.substr(6, 2)) - 1;
         var dia = parseInt(curpstr.substr(8, 2));
-        var fechanac = new Date(an, mes, dia);
-        var edad = Math.abs(hoy - fechanac) / (1000*60*60*24*365);
+        var dianac = new Date(an, mes, dia);
+        var edad = Math.abs(hoy - dianac) / (1000*60*60*24*365);
         if( edad < 18 )
             anadeError(errores, curp, "Los menores de edad no pueden contratar eventos");
     }
@@ -271,40 +284,42 @@ estado.addEventListener("change", (e) => {
 
 function colocaHoras(){
     if(salon.value != ''){
-        if(fecha.value != ''){
+        if(dia.value != ''){
             if(idcontrato != null){
                 $.getJSON("php/gethorarios.php",{
                     id_salon: salon.value,
-                    dia: fecha.value,
+                    dia: dia.value,
                     id: idcontrato
                 },
                 function(result){
-                    M.FormSelect.getInstance(horario).destroy();
-                    $(horario).empty();
+                    try{
+                    M.FormSelect.getInstance(hora).destroy();
+                    } catch(ex){}
+                    $(hora).empty();
                     $.each(result, function(val, txt){
-                        $(horario).append($("<option>", {
+                        $(hora).append($("<option>", {
                             value:val,
                             text:txt
                         }));
                     });
-                    M.FormSelect.init(horario, {});
+                    M.FormSelect.init(hora, {});
                 });
             }
             else{
                 $.getJSON("php/gethorarios.php",{
                     id_salon: salon.value,
-                    dia: fecha.value
+                    dia: dia.value
                 },
                 function(result){
-                    M.FormSelect.getInstance(horario).destroy();
-                    $(horario).empty();
+                    M.FormSelect.getInstance(hora).destroy();
+                    $(hora).empty();
                     $.each(result, function(val, txt){
-                        $(horario).append($("<option>", {
+                        $(hora).append($("<option>", {
                             value:val,
                             text:txt
                         }));
                     });
-                    M.FormSelect.init(horario, {});
+                    M.FormSelect.init(hora, {});
                 });
             }
         }
@@ -315,6 +330,6 @@ salon.addEventListener("change", (e) => {
     colocaHoras();
 });
 
-fecha.addEventListener("change", (e) => {
+dia.addEventListener("change", (e) => {
     colocaHoras();
 });
