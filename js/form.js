@@ -22,6 +22,7 @@ const botonregistra = document.getElementById("registra");
 const idcontrato = new URLSearchParams(window.location.search).get("id");
 var errores = new Map();
 var eliminame = new Array();
+var serializado;
 
 const form = document.getElementById("form");
 const coleccionErrores = document.getElementById("errores");
@@ -31,8 +32,6 @@ function init(){
     options = {};
     var elems = document.querySelectorAll('.modal');
     var instances = M.Modal.init(elems, options);
-    var elems = document.querySelectorAll('.slider');
-    var instances = M.Slider.init(elems, options);
     var elems = document.querySelectorAll('.timepicker');
     var instances = M.Timepicker.init(elems, options);
 }
