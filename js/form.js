@@ -18,12 +18,19 @@ const otroev = document.getElementById("otroev");
 const salon = document.getElementById("salon");
 const confirma = document.getElementById("confirma");
 const personas = document.getElementById("personas");
+const botonregistra = document.getElementById("registra");
+const idcontrato = new URLSearchParams(window.location.search).get("id");
 var errores = new Map();
 var eliminame = new Array();
 
 const form = document.getElementById("form");
 const coleccionErrores = document.getElementById("errores");
 const boton = document.getElementById("btn");
+
+function rk(obj, ok, nk){
+    obj[nk] = obj[ok];
+    delete obj[ok];
+}
 
 document.addEventListener("DOMContentLoaded", function() {
     optselect = {};
@@ -77,6 +84,19 @@ document.addEventListener("DOMContentLoaded", function() {
             }));
         });
     });
+    if(idcontrato != null){
+        $.getJSON("php/getregistro.php", {
+            id:idcontrato
+        }, function(result){
+            var ndatos = new Map();
+            $.each(result, function(val, txt){
+                nval = val.replace(/^id_/, '');
+                ndatos[nval] = txt;
+            });
+            salon.value = ndatos["salon"];
+
+        });
+    }
 
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems, optselect);
@@ -153,13 +173,13 @@ function colocaSiError(mapaErrores, objeto, errores){
         anadeError(mapaErrores, objeto, errores);
 }
 
-form.addEventListener("submit", (e) => {
+botonregistra.addEventListener("click", (e) => {
     errores.clear();
 
     var regnom = /^[\s,\.A-Za-záéíóúñÁÉÍÓÚÑ]{2,25}$/;
 
     vald([nombre, appat, apmat, calle, colonia], regnom, 2, 25);
-    vald([estado, alcaldia, menu, evento, salon, personas,horario], /^[0-9]+$/, 1, Infinity);
+    vald([estado, menu, evento, salon, personas,horario], /^[0-9]+$/, 1, Infinity);
     vald(numero, /^[0-9]{1,8}$/, 1, 8);
     vald(telefono, /^[0-9]{8,10}$/, 8,10);
     vald(cp, /^[0-9]{5}$/, 5, 5);
@@ -237,24 +257,56 @@ evento.addEventListener("change", (e) => {
     otroev.removeAttribute("required");
 });
 
+estado.addEventListener("change", (e) => {
+    console.log(evento.value);
+    M.FormSelect.getInstance(alcaldia).destroy();
+    if(estado.value == '1'){
+        $(alcaldia).prop("disabled", false);
+        M.FormSelect.init(alcaldia, {});
+        return;
+    }
+    $(alcaldia).prop("disabled", true);
+     M.FormSelect.init(alcaldia, {});
+});
+
 function colocaHoras(){
     if(salon.value != ''){
         if(fecha.value != ''){
-            $.getJSON("php/gethorarios.php",{
-                id_salon: salon.value,
-                dia: fecha.value
-            },
-            function(result){
-                M.FormSelect.getInstance(horario).destroy();
-                $(horario).empty();
-                $.each(result, function(val, txt){
-                    $(horario).append($("<option>", {
-                        value:val,
-                        text:txt
-                    }));
+            if(idcontrato != null){
+                $.getJSON("php/gethorarios.php",{
+                    id_salon: salon.value,
+                    dia: fecha.value,
+                    id: idcontrato
+                },
+                function(result){
+                    M.FormSelect.getInstance(horario).destroy();
+                    $(horario).empty();
+                    $.each(result, function(val, txt){
+                        $(horario).append($("<option>", {
+                            value:val,
+                            text:txt
+                        }));
+                    });
+                    M.FormSelect.init(horario, {});
                 });
-                M.FormSelect.init(horario, {});
-            });
+            }
+            else{
+                $.getJSON("php/gethorarios.php",{
+                    id_salon: salon.value,
+                    dia: fecha.value
+                },
+                function(result){
+                    M.FormSelect.getInstance(horario).destroy();
+                    $(horario).empty();
+                    $.each(result, function(val, txt){
+                        $(horario).append($("<option>", {
+                            value:val,
+                            text:txt
+                        }));
+                    });
+                    M.FormSelect.init(horario, {});
+                });
+            }
         }
     }
 }

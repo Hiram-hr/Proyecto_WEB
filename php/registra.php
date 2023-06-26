@@ -71,7 +71,7 @@
  $id = $curp.str_replace("-","",$fecha).str_replace(":","",$horario);
  echo $id." ".$dnum["salon"]." ".$fecha;
  $conexion->begin_transaction();
- $horastmt = $conexion->prepare("select id_hora from registros where id_hora = ? AND dia = ? AND id_registro != ? for update");
+ $horastmt = $conexion->prepare("select id_horario from registros where id_horario = ? AND dia = ? AND id_registro != ? for update");
  $horastmt->bind_param("iss", $rnum["horario"], $fecha, $id);
  $horastmt->execute();
  $horas = mysqli_stmt_get_result($horastmt);
@@ -81,7 +81,7 @@
    exit();
  }
 
- $registrastmt = $conexion->prepare("insert into registros values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+ $registrastmt = $conexion->prepare("replace into registros values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
  $registrastmt->bind_param("ssssssisiiisiiiisis", $id, $curp, $dtext["nombre"], $dtext["appat"], $dtext["apmat"], $dtext["calle"], $numero, $dtext["colonia"], $dnum["alcaldia"], $cp, $dnum["estado"], $correo, $telefono, $personas, $horario, $dnum["evento"], $otroev, $dnum["menu"], $fecha);
  $registrastmt->execute();
  $conexion->commit();

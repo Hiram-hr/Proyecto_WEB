@@ -28,7 +28,7 @@ create table evento(
 );
 
 create table menuhora(
-    id_hora int not null primary key auto_increment,
+    id_horario int not null primary key auto_increment,
     id_salon int not null,
     diasemana int not null,
     hora time not null,
@@ -50,7 +50,7 @@ create table registros(
     correo nvarchar(45) not null,
     telefono decimal(10) not null,
     personas decimal(3) not null,
-    id_hora int not null,
+    id_horario int not null,
     id_evento int not null,
     otroev varchar(25),
     id_menu int not null,
@@ -58,7 +58,7 @@ create table registros(
     foreign key (id_menu) references menu (id_menu),
     foreign key (id_alcaldia) references alcaldia (id_alcaldia),
     foreign key (id_estado) references estado (id_estado),
-    foreign key (id_hora) references menuhora (id_hora),
+    foreign key (id_horario) references menuhora (id_horario),
     foreign key (id_evento) references evento (id_evento)
 );
 
@@ -93,6 +93,7 @@ insert into menuhora (id_salon, diasemana, hora) values (3, 1, "21:00:00");
 insert into menu(menu) values ("Económico");
 insert into menu(menu) values ("Ejecutivo");
 
+insert into estado(estado) values ("Distrito Federal");
 insert into estado(estado) values ("Aguascalientes");
 insert into estado(estado) values ("Baja California");
 insert into estado(estado) values ("Baja California Sur");
@@ -101,7 +102,6 @@ insert into estado(estado) values ("Coahuila");
 insert into estado(estado) values ("Colima");
 insert into estado(estado) values ("Chiapas");
 insert into estado(estado) values ("Chihuahua");
-insert into estado(estado) values ("Distrito Federal");
 insert into estado(estado) values ("Durango");
 insert into estado(estado) values ("Guanajuato");
 insert into estado(estado) values ("Guerrero");
