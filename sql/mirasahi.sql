@@ -69,6 +69,8 @@ create table administrador(
 
 );
 
+insert into administrador(nick, pass) values("administrador", "demirasahi");
+
 insert into evento(evento) values ("Otro");
 insert into evento(evento) values ("Bautizo");
 insert into evento(evento) values ("Primera Comunión");

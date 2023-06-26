@@ -22,22 +22,35 @@
   </style>
 </head>
 <body class="gradiente">
-    <div class="col s12" style="background-color: #4dd0e1;">
-        <h2 class="header col s12 light center">Administrador</h5>
-    </div>
+    <div id="login">
+      <div class="col s12" style="background-color: #4dd0e1;">
+          <h2 class="header col s12 light center">Administrador</h5>
+      </div>
 
-  <main>
-    <form class="container row">
-            <div class="col s12">
-                <label for="usuario">Usuario</label>
-                <input id="usuario" name="usuario" type="text" class="validate">
-                <label for="contrasenia">Contraseña</label>
-                <input id="contrasenia" name="contrasenia" type="password" class="validate">
-            </div>
-            <div class="input-field col s12">
-              <button class="btn waves-effect waves-light" type="submit" name="iniciar">Iniciar Sesión</button>
-            </div>
-    </form>
-  </main>
+    <main>
+      <form class="container row" id="formlogin">
+              <div class="col s12">
+                  <label for="nick">Nick</label>
+                  <input id="nick" name="nick" type="text" class="validate">
+                  <label for="pass">Contraseña</label>
+                  <input id="pass" name="pass" type="password" class="validate">
+              </div>
+              <div class="input-field col s12">
+                <button class="btn waves-effect waves-light" type="button" id="ingresar" name="ingresar">Iniciar Sesión</button>
+              </div>
+      </form>
+    </main>
+  </div>
+  <div id="sini" hidden>
+      <div class="col s12" style="background-color: #4dd0e1;">
+          <h2 class="header col s12 light center">Contratos</h5>
+      </div>
+
+      <div class="collection" id="contratados">
+      </div>
+  </div>
+  <script src="js/jquery-3.7.0.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/admin.js"></script>
 </body>
 </html>
