@@ -19,7 +19,9 @@ const salon = document.getElementById("salon");
 const confirma = document.getElementById("confirma");
 const personas = document.getElementById("personas");
 const botonregistra = document.getElementById("registra");
+const botonconfirma = document.getElementById("enviaboton");
 const idcontrato = new URLSearchParams(window.location.search).get("id");
+const confirmadatos = document.getElementById("confirmadatos");
 var errores = new Map();
 var eliminame = new Array();
 var serializado;
@@ -120,6 +122,9 @@ document.addEventListener("DOMContentLoaded", function() {
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems, optselect);
 
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, {});
+
     //Inicializar elemento de dia del form
     const hoy = new Date();
     const options = {"format":"yyyy-mm-dd",
@@ -192,6 +197,18 @@ function colocaSiError(mapaErrores, objeto, errores){
         anadeError(mapaErrores, objeto, errores);
 }
 
+botonconfirma.addEventListener("click", (e) => {
+    $.post("php/registra.php", serializado, function(resultito){
+        var resultjson = JSON.parse(resultito);
+        if(resultjson["resultado"] == "exito"){
+            M.toast({html: 'El contrato fue enviado exitosamente'});
+        }
+        else{
+            M.toast({html: 'El contrato fue rechazado'});
+        }
+    }, );
+});
+
 botonregistra.addEventListener("click", (e) => {
     errores.clear();
 
@@ -211,8 +228,8 @@ botonregistra.addEventListener("click", (e) => {
         an += (hoy.getFullYear() - (hoy.getFullYear() % 100)) - ((an < (hoy.getFullYear() % 100)) ? (0) : (100));
 
         var mes = parseInt(curpstr.substr(6, 2)) - 1;
-        var dia = parseInt(curpstr.substr(8, 2));
-        var dianac = new Date(an, mes, dia);
+        var dianaci = parseInt(curpstr.substr(8, 2));
+        var dianac = new Date(an, mes, dianaci);
         var edad = Math.abs(hoy - dianac) / (1000*60*60*24*365);
         if( edad < 18 )
             anadeError(errores, curp, "Los menores de edad no pueden contratar eventos");
@@ -253,8 +270,37 @@ botonregistra.addEventListener("click", (e) => {
         M.updateTextFields();
     }
     else{
-        //Enviar aca
-        $.post("php/registra.php", $(form).serialize());
+        serializado = $(form).serialize();
+        var confirminstance = M.Modal.getInstance(confirma);
+        $(confirmadatos).empty();
+        $(confirmadatos)
+        .append("<h6>ID: " + curp.value + dia.value.replaceAll('-','') + hora.value + "</h6>")
+        .append("<h6>Nombre: " + curp.value + dia.value.replaceAll('-','') + hora.value + "</h6>")
+        .append("<h6>Apellido Paterno: " + appat.value + "</h6>")
+        .append("<h6>Apellido Materno: " + apmat.value + "</h6>")
+        .append("<h6>Calle: " + calle.value + "</h6>")
+        .append("<h6>Número: " + numero.value + "</h6>")
+        .append("<h6>Colonia: " + colonia.value + "</h6>")
+        .append("<h6>Código Postal: " + cp.value + "</h6>")
+        .append("<h6>Entidad Federativa: " + $("#estado option:selected").text() + "</h6>");
+        if(estado.value == 1)
+            $(confirmadatos).append("<h6>Alcaldía: " + $("#alcaldia option:selected").text() + "</h6>");
+        $(confirmadatos)
+        .append("<h6>Correo: " + correo.value + "</h6>")
+        .append("<h6>Teléfono: " + telefono.value + "</h6>")
+        .append("<h6>CURP: " + curp.value + "</h6>")
+        .append("<h6>Fecha del evento: " + dia.value + "</h6>")
+        .append("<h6>Horario: " + $("#menuhora option:selected").text() + "</h6>")
+        .append("<h6>Tipo de evento: " + $("#evento option:selected").text() + "</h6>");
+        if(evento.value == 1)
+            $(confirmadatos).append("<h6>Evento alterno: " + otroev.value + "</h6>");
+        $(confirmadatos)
+        .append("<h6>Número de personas: " + personas.value + "</h6>")
+        .append("<h6>Menú: " + $("#menu option:selected").text() + "</h6>")
+        .append("<h6>Salón: " + $("#salon option:selected").text() + "</h6>");
+
+
+        confirminstance.open();
     }
 });
 
