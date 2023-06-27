@@ -219,7 +219,7 @@ botonregistra.addEventListener("click", (e) => {
     vald(numero, /^[0-9]{1,8}$/, 1, 8);
     vald(telefono, /^[0-9]{8,10}$/, 8,10);
     vald(cp, /^[0-9]{5}$/, 5, 5);
-    vald(curp, /^[A-Z]{4}[0-9]{2}(1[0-2]|0[1-9])([1-2][0-9]|0[1-9]|3[0-1])(H|M)[A-Z]{2}[A-Z]{3}[0-9]{2}$/, 18, 18);
+    vald(curp, /^[A-Z]{4}[0-9]{2}(1[0-2]|0[1-9])([1-2][0-9]|0[1-9]|3[0-1])(H|M)[A-Z]{2}[A-Z]{3}[B-DF-HJ-NP-TV-Z0-9][0-9]$/, 18, 18);
     if(!errores.has(curp)){
         var hoy = new Date();
         var curpstr = curp.value;
@@ -275,7 +275,7 @@ botonregistra.addEventListener("click", (e) => {
         $(confirmadatos).empty();
         $(confirmadatos)
         .append("<h6>ID: " + curp.value + dia.value.replaceAll('-','') + hora.value + "</h6>")
-        .append("<h6>Nombre: " + curp.value + dia.value.replaceAll('-','') + hora.value + "</h6>")
+        .append("<h6>Nombre: " + nombre.value + "</h6>")
         .append("<h6>Apellido Paterno: " + appat.value + "</h6>")
         .append("<h6>Apellido Materno: " + apmat.value + "</h6>")
         .append("<h6>Calle: " + calle.value + "</h6>")

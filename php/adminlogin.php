@@ -1,4 +1,5 @@
 <?php
+ session_start();
  include_once('../secretos/conexionsql.php');
  $nick = $_POST['nick'];
  $pass = $_POST['pass'];
@@ -10,7 +11,6 @@
  $login = mysqli_stmt_get_result($loginstmt);
  if($login){
     if($row = mysqli_fetch_array($login)){
-        session_start();
         $_SESSION["admin"] = "true";
         $_SESSION["nick"] = $nick;
         echo json_encode(["resultado" => "exito"]);

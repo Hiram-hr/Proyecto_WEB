@@ -59,7 +59,7 @@
  }
 
  $curp = $_POST["curp"];
- if(!preg_match("/^[A-Z]{4}[0-9]{2}(1[0-2]|0[1-9])([1-2][0-9]|0[1-9]|3[0-1])(H|M)[A-Z]{2}[A-Z]{3}[0-9]{2}$/", $curp)){
+ if(!preg_match("/^[A-Z]{4}[0-9]{2}(1[0-2]|0[1-9])([1-2][0-9]|0[1-9]|3[0-1])(H|M)[A-Z]{2}[A-Z]{3}[B-DF-HJ-NP-TV-Z0-9][0-9]$/", $curp)){
       echo json_encode(["resultado" => "error", "causa" => "curp"]);
       exit();
  }
